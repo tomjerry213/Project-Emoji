@@ -1,18 +1,21 @@
-// pages/searchres/searchres.js
+// miniprogram/pages/searchres.js
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+        searchVal:"xxx",
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        var inpVal = JSON.parse(options.inputVal)
+        this.setData({
+            searchVal: inpVal["detail"]["value"]
+        })
     },
 
     /**

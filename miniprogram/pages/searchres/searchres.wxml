@@ -1,2 +1,3 @@
-<!--pages/searchres/searchres.wxml-->
-<text>pages/searchres/searchres.wxml</text>
+<!--miniprogram/pages/searchres.wxml-->
+<text>正在搜索：</text>
+<view>{{searchVal}}</view>

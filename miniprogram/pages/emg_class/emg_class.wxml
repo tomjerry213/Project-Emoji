@@ -1,0 +1,4 @@
+<!--miniprogram/pages/emg_class/emg_class.wxml-->
+<text>miniprogram/pages/emg_class/emg_class.wxml</text>
+<text>此处显示：</text>
+<view>{{classname}}类别</view>

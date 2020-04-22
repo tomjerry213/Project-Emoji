@@ -1,0 +1,55 @@
+<!--index.wxml-->
+<view class="container">
+
+<!--modify for search bar-->
+<view class='page_row' bindtap="search">
+    <view class="search">
+      <view class="df search_arr">
+        <!-- <icon class="searchicon" size='14' type='search'></icon> -->
+        <input class="sousuo" disabled placeholder="点击搜索表情包OvO🔍" bindtap='search'/>
+      </view>
+    </view>
+</view>
+
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title">为你推荐</view>
+        <!-- <view class="page__desc">九宫格</view> -->
+    </view>
+
+    <view class="weui-grids">
+        <view class="weui-grid" wx:for="{{rec_routers}}" wx:key="name">
+            <!-- <navigator url="{{item.url+'?name='+item.name}}"> dislay a emg-->
+            <navigator url="{{item.url+'?name='+item.name}} "class="weui-grid">
+                <view class = "weui-grid__bg">
+                    <view class="weui-grid__icon">
+                        <image src=" {{item.icon}}" mode = "scaleToFill"/>
+                    </view>
+                    <text class="weui-grid__label">{{item.name}}</text>
+                </view>
+            </navigator>
+            
+        </view>
+    </view>
+</view>
+<!--好像可以合并成一个然后自动解析-->
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title">最近热门</view>
+        <!-- <view class="page__desc">九宫格</view> -->
+    </view>
+</view>
+    <view class="weui-grids">
+        <view class="weui-grid" wx:for="{{hot_routers}}" wx:key="name">
+            <!-- <navigator url="{{item.url+'?name='+item.name}}"> dislay a emg-->
+            <navigator url="{{item.url+'?name='+item.name}} "class="weui-grid">
+                <view class = "weui-grid__bg">
+                    <view class="weui-grid__icon">
+                        <image src=" {{item.icon}}" mode = "scaleToFill"/>
+                    </view>
+                    <text class="weui-grid__label">{{item.name}}</text>
+                </view>
+            </navigator>
+        </view>
+    </view>
+</view>

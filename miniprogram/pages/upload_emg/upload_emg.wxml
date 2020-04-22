@@ -1,0 +1,68 @@
+
+
+<view class='content'>
+
+  <view class='img-box'>
+    <view class='img-list'>
+      
+      <block wx:for="{{detailPics}}" wx:key="index">
+        <view class='img-item'>
+          <image src='{{item}}' bindlongpress="bindlongpressimg" data-id='{{index}}' bindtap="previewImage" mode="aspectFill"></image>
+        </view>
+      </block>
+      <view class='chooseimg' bindtap='uploadDetailImage'>
+        <view class="weui-uploader__input-box"></view>
+      </view>
+    </view>
+    <view class="weui-uploader__info">上传数目{{detailPics.length}}/9</view>
+    <view class='tips'>长按对应的图片即可删除</view>
+  </view>
+</view>
+
+
+
+
+<view class="section">
+  <view class="section__title">选择表情包类别</view>
+  <picker bindchange="bindTypeChange" value="{{type_index}}" range="{{type_array}}">
+    <view class="picker">
+      当前选择：{{type_array[type_index]}}
+    </view>
+  </picker>
+</view>
+<view class="section">
+  <view class="section__title">选择表情包风格</view>
+  <picker bindchange="bindStyleChange" value="{{style_index}}" range="{{style_array}}">
+    <view class="picker">
+      当前选择: {{style_array[style_index]}}
+    </view>
+  </picker>
+</view>
+
+<view class="section">
+  <view class="section__title">选择目标文件夹</view>
+  <picker bindchange="bindFolderChange" value="{{folder_index}}" range="{{folder_array}}">
+    <view class="picker">
+      当前选择: {{folder_array[folder_index]}}
+    </view>
+  </picker>
+</view>
+<view class="section">
+  <view class="section__title">请输入对表情包的描述</view>
+  <view style="border: 1px solid #5c5c5c; border-radius: 10px; margin:10px; height:100px;">
+      <textarea placeholder-class="place-holder"  placeholder="" name="introduction" maxlength='30' bindinput='limit' value="{{text}}" style="font-size: 13px; margin:10px; height:100px;"/>
+        <!-- 显示字数 -->
+        <view class="clear">
+          <text style="color: #ccc; font-size: 14px; float: right; margin-right: 2%;">{{current_len}} / {{max_des_len}} （上限30字）</text>
+        </view>
+  </view>
+
+</view>
+  <button bindtap="uploadImg" class="weui-btn green-btn" hover-class="green-hover-class" size="mini">上传</button>
+
+<!-- <button bindtap="uploadImg" class="confirm_upload">确定上传</button> -->
+
+
+<!-- <view class="container">
+  <button bindtap='chooseImageTap'>上传图片</button>
+</view> -->

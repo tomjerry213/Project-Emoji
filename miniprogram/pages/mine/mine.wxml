@@ -1,66 +1,39 @@
 
 
 <view class="page">
-    <view class="page__hd">
-    </view>
-    <view class="page__bd">
 
-        <view class="weui-panel">
-            <!-- <view class="weui-panel__hd">操作</view> -->
-            <view class="weui-panel__bd">
-                <view class="weui-media-box weui-media-box_small-appmsg">
-                    <view class="weui-cells weui-cells_in-small-appmsg">
-                        <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-                            <!-- <view class="weui-cell__hd"> -->
-                                
-                            <view class="cells" style="margin-top: 10px;margin-bottom: 10px;background-color: rgb(255, 255, 255);">
-                            <!-- 应该是没用的玩意，教程上down的 -->
-                            <view class="weui-cell__bd    weui-cell_primary">
-                                <image src="/icons/star-Y.png" style="width: 20px;height: 20px;margin-right: 5px;margin-left: 5px;" />
-                                <text>我的收藏</text>
-                            </view>
-                            </view>
-                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-                        </navigator>
-                        <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-                            <!-- <view class="weui-cell__hd"> -->
-                                
-                            <!-- </view> -->
-                            <view class="cells" style="margin-top: 10px;margin-bottom: 10px;background-color: rgb(255, 255, 255);">
-                            <view class="weui-cell__bd weui-cell_primary">
-                                <image src="/icons/cloud-HL.png" style="width: 20px;height: 20px;margin-right: 5px;margin-left: 5px;" />
-                                <text>我的上传</text>
-                            </view>
-                            </view>
-                            <!-- <view class="weui-cell__ft weui-cell__ft_in-access"></view> -->
-                        </navigator>
-
-                        <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-                            <!-- <view class="weui-cell__hd"> -->
-                                
-                            <!-- </view> -->
-                             <view class="cells" style="margin-top: 10px;margin-bottom: 10px;background-color: rgb(255, 255, 255);">
-                            <view class="weui-cell__bd weui-cell_primary">
-                            <image src="/icons/like-HL.png" style="width: 20px;height: 20px;margin-right: 5px;margin-left: 5px;" />
-                                <text>收到的赞</text>
-                            </view>
-                            </view>
-                            <!-- <view class="weui-cell__ft weui-cell__ft_in-access"></view> -->
-                        </navigator>
-                        <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-
-                             <view class="cells" style="margin-top: 10px;margin-bottom: 10px;background-color: rgb(255, 255, 255);">
-                            <view class="weui-cell__bd weui-cell_primary">
-                                <image src="/icons/house-HL.png" style="width: 20px;height: 20px;margin-right: 5px;margin-left: 5px;" />
-                                <text>关于我们</text>
-                            </view>
-                            </view>
-                            <!-- <view class="weui-cell__ft weui-cell__ft_in-access"></view> -->
-                        </navigator>
-                    </view>
-                </view>
-            </view>
+    <view class='avatar_background'>
+        <view id="avatar_view">
+            <open-data type="userAvatarUrl" id="avatar"></open-data>
         </view>
-
+        <open-data type="userNickName" id="nickname"></open-data>
     </view>
+
+    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="cells">
+            <image class="icon" src="/icons/star-Y.png"  />
+            <text>我的收藏</text>
+        </view>
+    </navigator>
+    
+    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="cells">
+            <image class="icon" src="/icons/cloud-HL.png"/>
+            <text>我的上传</text>
+        </view>
+    </navigator>
+
+    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="cells">
+            <image class="icon" src="/icons/like-HL.png"/>
+            <text>收到的赞</text>
+        </view>
+    </navigator>
+
+    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="cells">
+            <image class="icon" src="/icons/house-HL.png"/>
+            <text>关于我们</text>
+        </view>
+    </navigator>
 </view>

@@ -1,4 +1,42 @@
 
-.weui-cell{
-  margin-top: 10px;
+view.avatar_background{
+    background-color: white;
+    margin-bottom: 10px;
+    padding: 1rem;
 }
+
+#avatar_view{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    overflow: hidden;
+    display: inline-block;
+    margin: 0rem 1rem;
+    border: 2px solid black;
+    vertical-align: middle;
+  
+}
+  
+#nickname{
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+.cells{
+    padding: 10px;
+    font-weight: bold;
+    background-color: rgb(255, 255, 255);
+    border-bottom: 1px lightgray solid;
+}
+
+image.icon{
+    width: 20px; height: 20px;
+    margin: 0px 5px;
+    vertical-align: middle;
+}
+
+.cells text{
+    margin-left: 10px;
+    vertical-align: middle;
+}
+

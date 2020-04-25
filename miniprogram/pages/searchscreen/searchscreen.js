@@ -12,6 +12,8 @@ Page({
     },
 
     search_start: function(inputVal){
+        console.log(inputVal)
+        console.log(JSON.stringify(inputVal))
         wx.navigateTo({
             url:'../searchres/searchres?inputVal='+JSON.stringify(inputVal),
         })

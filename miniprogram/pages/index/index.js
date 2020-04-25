@@ -10,6 +10,16 @@ Page({
         requestResult: '',
         /*actually a paser is enough, for further use*/ 
 
+
+        hot_searches: [
+            '我太难了',
+            '我酸了',
+            '奇怪的知识',
+            '奥利给',
+            '我想上学',
+            '黑人抬棺',
+        ],
+
         // TODO: 未来将要从云存储（而不是本地）加载这些图片和类
         rec_routers: [
             {
@@ -111,4 +121,11 @@ Page({
             }
         })
     },
+
+    search_start: function(inputVal){
+        console.log(inputVal)
+        wx.navigateTo({
+            url:'../searchres/searchres?inputVal='+JSON.stringify(inputVal),
+        })
+    }
 })

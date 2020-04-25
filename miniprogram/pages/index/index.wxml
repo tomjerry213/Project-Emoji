@@ -1,55 +1,52 @@
 <!--index.wxml-->
-<view class="container">
 
-<!--modify for search bar-->
-<view class='page_row' bindtap="search">
-    <view class="search">
-      <view class="df search_arr">
-        <!-- <icon class="searchicon" size='14' type='search'></icon> -->
-        <input class="sousuo" disabled placeholder="点击搜索表情包OvO🔍" bindtap='search'/>
-      </view>
-    </view>
+<!--这里以后可以设计一张好看的海报-->
+<view class="header">
+    <image class="poster" src="/images/poster.jpg" mode="scaleToFill"/>
+</view>
+
+<view class="search" bindtap="search">
+    <!-- <icon class="searchicon" size='14' type='search'></icon> -->
+    <input class="search_input" disabled placeholder="点击搜索表情包OvO🔍" bindtap='search'/>
+    <view class="search_button" bindtap="search">搜表情</view>
 </view>
 
 <view class="page">
+    
     <view class="page__hd">
-        <view class="page__title">为你推荐</view>
-        <!-- <view class="page__desc">九宫格</view> -->
+        <view class="page_title">热门搜索</view>
+        <view class="weui-grids">
+            <view class="weui-grid hot_search_grid" wx:for="{{hot_searches}}">
+                <text type="button" class="hot_search_word">{{item}}</text> 
+            </view>
+        </view>
     </view>
 
-    <view class="weui-grids">
-        <view class="weui-grid" wx:for="{{rec_routers}}" wx:key="name">
-            <!-- <navigator url="{{item.url+'?name='+item.name}}"> dislay a emg-->
-            <navigator url="{{item.url+'?name='+item.name}} "class="weui-grid">
-                <view class = "weui-grid__bg">
-                    <view class="weui-grid__icon">
-                        <image src=" {{item.icon}}" mode = "scaleToFill"/>
-                    </view>
-                    <text class="weui-grid__label">{{item.name}}</text>
-                </view>
-            </navigator>
-            
-        </view>
-    </view>
-</view>
-<!--好像可以合并成一个然后自动解析-->
-<view class="page">
     <view class="page__hd">
-        <view class="page__title">最近热门</view>
-        <!-- <view class="page__desc">九宫格</view> -->
-    </view>
-</view>
-    <view class="weui-grids">
-        <view class="weui-grid" wx:for="{{hot_routers}}" wx:key="name">
-            <!-- <navigator url="{{item.url+'?name='+item.name}}"> dislay a emg-->
-            <navigator url="{{item.url+'?name='+item.name}} "class="weui-grid">
-                <view class = "weui-grid__bg">
-                    <view class="weui-grid__icon">
-                        <image src=" {{item.icon}}" mode = "scaleToFill"/>
-                    </view>
-                    <text class="weui-grid__label">{{item.name}}</text>
-                </view>
-            </navigator>
+        <view class="page_title">精选表情</view>
+        <view class="weui-grids">
+            <view class="weui-grid" wx:for="{{rec_routers}}" wx:key="name">
+                <navigator url="{{item.url+'?name='+item.name}}">
+                    <image class="grid_emoji" src="{{item.icon}}" mode="scaleToFill"/>
+                    <text class="grid_label">{{item.name}}</text>
+                </navigator>
+            </view>
         </view>
     </view>
+
+    <view class="page__hd">
+        <view class="page_title">最近热门</view>
+        <view class="weui-grids">
+            <view class="weui-grid" wx:for="{{hot_routers}}" wx:key="name">
+                <navigator url="{{item.url+'?name='+item.name}}">
+                        <image class="grid_emoji" src=" {{item.icon}}" mode = "scaleToFill"/>
+                        <text class="grid_label">{{item.name}}</text>
+                </navigator>
+            </view>
+        </view>
+    </view>
+
+    <!--
+        TODO: 等有素材之后，这里可以加上一些专题表情。比如熊猫头专题、柴犬专题等。
+    -->
 </view>

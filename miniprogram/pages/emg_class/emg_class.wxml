@@ -1,4 +1,45 @@
 <!--miniprogram/pages/emg_class/emg_class.wxml-->
-<text>miniprogram/pages/emg_class/emg_class.wxml</text>
-<text>此处显示：</text>
-<view>{{classname}}类别</view>
+
+<!-- using another
+     <action-sheet hidden="{{featureOptionHidden}}" bindchange="changeFeatures">
+    <block wx:for="{{featuresOptions}}">
+        <action-sheet-item class="item" bindtap="chooseFeature" data-name="{{item}}">{{item}}</action-sheet-item>
+    </block>
+    <action-sheet-cancel class="cancel">Cancel</action-sheet-cancel>
+</action-sheet> -->
+
+<view class="container">
+
+    <view class="header">
+        <image class="poster" src="/images/poster.jpg" mode="scaleToFill"/>
+    </view>
+
+    <view class="search" bindtap="search">
+        <!-- <icon class="searchicon" size='14' type='search'></icon> -->
+        <input class="search_input" disabled placeholder="换个关键词试试吧=v=🔍" bindtap='search'/>
+        <view class="search_button" bindtap="search">搜表情</view>
+    </view>
+
+
+    <scroll-view class='section photos' style="height: 750px;" scroll-y="true" bindscrolltolower="loadMore" bindscrolltoupper="showFeatureOptions">
+        <!-- <image class="photo" src="{{test_url}}"></image> -->
+        <view class="photo-list">
+            <block wx:for="{{photos}}">
+                <view class="photo-item" id="{{item.id}}" catchtap="lookPhoto">
+                    <!-- <image class="photo" src="{{item.url}}"></image> -->
+                    <image class="photo" src="{{testUrl}}"></image>
+                </view>
+            </block>
+        </view>
+
+
+        <view class="load-more-wrap">
+            <block wx:if="{{hasMore}}">
+                <text class="weui-loading"/><text class="load-content">Loading...</text>
+            </block>
+            <block wx:else>
+                <view class="load-content"><text>No more... Orz</text></view>
+            </block>
+        </view>
+    </scroll-view>
+</view>

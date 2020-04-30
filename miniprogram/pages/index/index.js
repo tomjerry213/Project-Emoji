@@ -21,7 +21,7 @@ Page({
         ],
 
         // TODO: 未来将要从云存储（而不是本地）加载这些图片和类
-        rec_routers: [
+        recRouters: [
             {
                 name: '软工作业',
                 url: '/pages/emg_class/emg_class',
@@ -55,7 +55,7 @@ Page({
             },
         ],
 
-        hot_routers: [
+        hotRouters: [
             {
                 name: 'grid0',
                 url: '/pages/emg_class/emg_class',
@@ -89,13 +89,19 @@ Page({
             },
         ]
     },
-
+    // for search bar
     search: function () {
         wx.navigateTo({
             url: '../searchscreen/searchscreen'
         })
     },
-
+    // touch hot words, now we are using class show, need add name and process/search
+    tapHotWords: function() {
+        wx.navigateTo({
+            url: '../emg_class/emg_class'
+        })
+    },
+    //生命周期函数
     onLoad: function() {
         if (!wx.cloud) {
             wx.redirectTo({
@@ -121,11 +127,13 @@ Page({
             }
         })
     },
-
+    // not useful new 
     search_start: function(inputVal){
         console.log(inputVal)
         wx.navigateTo({
             url:'../searchres/searchres?inputVal='+JSON.stringify(inputVal),
         })
     }
+
+
 })

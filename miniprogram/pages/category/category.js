@@ -11,7 +11,7 @@ Page({
         /*actually a paser is enough, for further use 请搭配多级目录*/
 
         // TODO: 未来将要从云存储（而不是本地）加载这些图片和类
-        fig_type_routers: [
+        figTypeRouters: [
             {
                 name: '动漫',
                 url: '/pages/emg_class/emg_class',
@@ -45,7 +45,7 @@ Page({
             },
 
         ],
-        style_routers: [
+        styleRouters: [
             {
                 name: '正经',
                 url: '/pages/emg_class/emg_class',
@@ -79,7 +79,7 @@ Page({
             },
         ]
     },
-
+    //for search bar
     search: function () {
         wx.navigateTo({
             url: '../searchscreen/searchscreen'
@@ -88,16 +88,6 @@ Page({
 
     onLoad: function() {
 
-    },
-
-    onGetUserInfo: function(e) {
-        if (!this.data.logged && e.detail.userInfo) {
-            this.setData({
-                logged: true,
-                avatarUrl: e.detail.userInfo.avatarUrl,
-                userInfo: e.detail.userInfo
-            })
-        }
     },
 
 })

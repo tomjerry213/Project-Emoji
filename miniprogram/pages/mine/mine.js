@@ -1,4 +1,4 @@
-// miniprogram/pages/mine/mine.js
+//前端这部分我的界面还没有实现跳转和界面搭建，我的
 Page({
 
   /**

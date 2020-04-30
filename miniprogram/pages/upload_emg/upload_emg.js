@@ -5,20 +5,20 @@ Page({
    * 页面的初始数据
    */
   data: {
-    type_array: ['动漫', '人像', '动漫GIF', '人像GIF','简笔','其他'],
-    style_array:['正经','复古','悲伤','快乐','互损','其他' ],
-    folder_array:['user_main1','user_main2'],
-    type_index: 0,
-    style_index:0,
-    folder_index:0,
+    typeArray: ['动漫', '人像', '动漫GIF', '人像GIF','简笔','其他'],
+    styleArray:['正经','复古','悲伤','快乐','互损','其他' ],
+    folderArray:['userMain1','userMain2'],
+    typeIndex: 0,
+    styleIndex:0,
+    folderIndex:0,
 
     /*bqb输入描述*/ 
-    current_len:0,
-    max_des_len:30,
-    emg_description:"",
+    currentLen:0,
+    maxDesLen:30,
+    emgDescription:"",
     detailPics: [],
   },
-  //限制描述字数
+  //限制描述的字数和展示
   limit: function (e)  {
     var value = e.detail.value;
     var length = parseInt(value.length);
@@ -26,27 +26,26 @@ Page({
     if  (length > this.data.noteMaxLen) {
       return;
     }
-
     this.setData({
-      current_len: length,
-      emg_description:value,
+      currentLen: length,
+      emgDescription:value,
     });
   },
-  //选择类型操作
+  //选择类型，风格，文件夹操作
   bindTypeChange: function(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
-      type_index: e.detail.value
+      typeIndex: e.detail.value
     })
   },
   bindStyleChange: function(e) {
     this.setData({
-      style_index: e.detail.value
+      styleIndex: e.detail.value
     })
   },
   bindFolderChange: function(e) {
     this.setData({
-      floder_index: e.detail.value
+      floderIndex: e.detail.value
     })
   },
 
@@ -126,7 +125,7 @@ Page({
           for (var i = 0; i < imgs.length; i++) {
             pics.push(imgs[i])
           }
-          //此处实施上传
+          //实施上传
           // that.uploadimg({
           //   // url: "/page/image", 
           //   path: pics, 
@@ -147,7 +146,8 @@ Page({
         urls: this.data.detailPics
       })
     },
-    bindlongpressimg:function(e) {
+    //长按删除
+    bindLongPressimg:function(e) {
         var that = this;    var images = that.data.detailPics;    var index = e.currentTarget.dataset.index; //获取当前长按图片下标
         wx.showModal({
           title: '操作提示',
@@ -164,7 +164,7 @@ Page({
           }
         })
     },
-
+    //点击上传按钮执行上传操作，没有测试
     uploadimg: function (data) {
       wx.showLoading({
         title: '上传中...',

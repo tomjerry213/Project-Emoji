@@ -90,7 +90,7 @@ view.page_title{
 .hot_search_word::before,
 .hot_search_word::after{
     content: "#";
-    font-size: 8px;
+    font-size: 7px;
 }
 
 

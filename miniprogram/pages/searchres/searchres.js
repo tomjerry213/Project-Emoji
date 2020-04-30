@@ -1,4 +1,5 @@
 // miniprogram/pages/searchres.js
+// for search res，现在是直接连到了
 Page({
 
     /**

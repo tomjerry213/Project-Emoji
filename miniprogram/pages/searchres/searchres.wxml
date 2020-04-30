@@ -1,3 +1,5 @@
 <!--miniprogram/pages/searchres.wxml-->
 <text>正在搜索：</text>
 <view>{{searchVal}}</view>
+
+<!-- 然后跳转到emg_class/新加一个page做display -->

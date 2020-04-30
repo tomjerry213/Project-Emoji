@@ -1,0 +1,50 @@
+author：lsl
+
+UI：
+调用WeUI开发组件库
+每个界面都有生命周期函数，一般在onload函数中初始化数据
+
+开始界面：
+主界面index：tabber含四个界面：首页，分类，上传，我的
+对应pages中的 index ， category ， upload ， mine
+index界面的onload调取wx.getSetting获取授权，getSetting再调用wx.getUserInfo获取用户信息
+
+目前所有界面概述：
+index：			首页主界面
+category：		分类界面，与index基本差不多，为分类展示而不是推荐等
+upload_emg:		上传界面
+mine:			用户的个人界面，包括收藏，上传，收到赞，联系我们
+emg_class:		一个类别的表情包的展示
+emg_display:	单张表情包的展示
+searchres:		搜索结果，应当进行处理搜索内容 + 跳转到emg_class等
+searchscreen:	点击搜索框后的搜索界面，获取用户输入
+
+
+界面函数解释和调用关系：
+由于wxml中class主要是为了在wxss中渲染，只做部分clas的解释
+index 和 category界面功能上主要调用weUI的searchbar和制表grid组件
+class:searchInput作为searchbar，点击后调用search函数进入searchscreen界面，获取用户输入
+
+"weui-grid hot_search_grid"的类是热门搜索的grid，点击后调用的是TapHotWords函数跳转到emg_class展示一类的bqb，后面需要改成处理热词再到emg_class（感觉和搜索时复用的）
+
+
+表情包的grid即“精选表情”和“为你推荐”也是调用weUI的grid组件
+index和category的grid中点击每一项都跳转到emg_class界面（直接写的wx.navigateTo）
+emg_class中也包含searchbar，和同类多张bqb的展示
+点击这些bqb跳转到emg_display，即单张表情包的展示界面可进行点赞/收藏，不过还未实现
+
+
+searchscreen回车后跳转至searchres界面处理用户输入（但是为了demo现在直接跳转到某个表情包类别的展示界面emg_class）
+调用weUI的weui-search-bar
+searchscreen界面函数：hideInput:回退到主界面，searchStart：按下回车搜索跳转
+
+
+
+表情包上传部分：
+uploadDetailImage函数选择上传的表情包，调用wx.chooseImage选取本地相册
+bindlongpressimg函数长按删除
+uploadimg上传表情包，调用wx.uploadFile
+
+用户个人：
+mine界面暂时还是个皮，暂时没有写跳转逻辑和后续界面
+需要和后端的用户信息连起来，比如bqb列表，收到的赞，收藏等

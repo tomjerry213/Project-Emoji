@@ -11,7 +11,7 @@ Page({
         /*actually a paser is enough, for further use*/ 
 
 
-        hot_searches: [
+        hotSearches: [
             '我太难了',
             '我酸了',
             '奇怪的知识',
@@ -128,7 +128,7 @@ Page({
         })
     },
     // not useful new 
-    search_start: function(inputVal){
+    searchStart: function(inputVal){
         console.log(inputVal)
         wx.navigateTo({
             url:'../searchres/searchres?inputVal='+JSON.stringify(inputVal),

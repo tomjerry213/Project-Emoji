@@ -1,0 +1,57 @@
+<!--miniprogram/pages/emg_display/emg_display.wxml-->
+<!-- 图片样张展示 + 类似hotsearch的tag -->
+
+<view class="container">
+    <view class="topic-detail">
+        <!-- <view class="topic-owner">
+            <image class="owner-avatar" src="{{photo.user.userpic_url}}" id="{{photo.user.id}}" bindtap="loadUser"></image>
+            <view class="topic-tit">{{photo.user.fullname}} ({{photo.user.username}})</view>
+        </view> -->
+        <image style="width: 750rpx; height: {{height}}rpx; background-color: #ffffff;" src="{{ImgUrl}}" mode="aspectFit" bindtap="showPhotoInfo"></image>
+        <!-- <view class="topic-desc">
+            <text>{{photo.description}}</text>
+        </view> -->
+        <!-- <view class="topic-tags">
+            <block wx:for="{{tags}}">
+                #{{item}}
+            </block>
+        </view> -->
+
+<!-- tags here -->
+    <view class="page__hd">
+      <view class="weui-grids">
+          <view class="weui-grid tags_grid" wx:for="{{tags}}">
+              <text type="button" class="class_tags">{{item}}</text> 
+          </view>
+      </view>
+    </view>
+
+<!-- like & collect 我还没写完,不写了,wxss还没搞先做了demo再说 -->
+    <view class="cells">
+      <image class="icon" src="/icons/like-HL.png"  />
+      <text>点赞</text>
+    </view>
+
+    <view class="cells">
+      <image class="icon" src="/icons/star-HL.png"  />
+      <text>收藏</text>
+    </view>
+  </view>
+
+
+<!-- replies, not supported yet -->
+
+    <!-- <view class="replies">
+        <block wx:for="{{comments}}">
+            <view class="replies-item" id="{{item.id}}">
+                <view class="reply-owner">
+                    <image class="reply-avatar" src="{{item.user.userpic_url}}" id="{{item.user.id}}" bindtap="loadUser"></image>
+                    <text class="reply-name">{{item.user.fullname}}</text>
+                </view>
+                <view class="reply-content">
+                    {{item.body}}
+                </view>
+            </view>
+        </block>
+    </view> -->
+</view>

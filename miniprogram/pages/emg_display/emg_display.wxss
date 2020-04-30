@@ -1,0 +1,55 @@
+/* miniprogram/pages/emg_display/emg_display.wxss */
+
+.weui-grids {
+  position: relative;
+  overflow: hidden;
+}
+.page__hd{
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 1rem lightgray solid;
+}
+.weui-grid {
+  padding: 5px;
+  width: 25%;
+  display: inline-block;
+  border: none;
+}
+
+.tags_grid{
+  font-weight: normal;
+  font-size: 12px;
+  padding: 0px;
+}
+
+.class_tags::before,
+.class_tags::after{
+  content: "#";
+  font-size: 8px;
+}
+
+text.grid_label{
+  display: inline-block;
+  font-size: 12px;
+  text-align: center;
+  margin: 2px;
+  padding: 0px;
+  color: #888888;
+}
+
+/* for cell icons */
+.cells{
+  padding: 10px;
+  font-weight: bold;
+  background-color: rgb(255, 255, 255);
+  border-bottom: 1px lightgray solid;
+
+  
+}
+
+image.icon{
+  vertical-align: middle;
+  width: 20px; height: 20px;
+  margin: 0px 5px;
+  vertical-align: middle;
+}

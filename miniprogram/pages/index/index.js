@@ -10,7 +10,6 @@ Page({
         requestResult: '',
         /*actually a paser is enough, for further use*/ 
 
-
         hotSearches: [
             '我太难了',
             '我酸了',
@@ -126,6 +125,7 @@ Page({
                 }
             }
         })
+        console.log(this.data.userInfo)
     },
     // not useful new 
     searchStart: function(inputVal){

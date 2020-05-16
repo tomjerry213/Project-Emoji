@@ -9,20 +9,20 @@ var name2url = {
   '真人':'/emg_test/rec_5.jpg'
 };
 
+const db = wx.cloud.database({});
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    className:"xxx",//not link, link to database and return photo list,show this class
+    className:"xxx",//get name onload, search in db
     rpp:20,
     loading:false,//开始true, load结束后改为false
 
     testUrl: '/emg_test/rec_0.jpg',
-
-
-    // while linked 2 database ,change wxml and use here
+    // while linked to database ,change wxml and use here and load more
     // not used now
     photos:[
       {
@@ -112,7 +112,16 @@ Page({
       this.setData({
         testUrl:url
       })
-    }
+    }//test url
+    //load database,搜索处理和获取长度在哪啊..
+    const db = wx.cloud.database({
+    })
+    db.collection('sticker').get({
+      success: res=>{
+        console
+      }
+    })
+
   },
 
   /**

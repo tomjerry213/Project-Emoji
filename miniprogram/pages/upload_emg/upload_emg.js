@@ -37,8 +37,8 @@ Page({
     //for save path
     tmpStickerId:'',
     tmpType:'',
-    tmpCloudPath:'',
-    tmpFileID:'',
+    // tmpCloudPath:'',
+    // tmpFileID:'',
 
     typeArray: ['动漫', '人像', '动漫GIF', '人像GIF','简笔','其他'],
     styleArray:['正经','复古','悲伤','快乐','互损','其他' ],
@@ -90,6 +90,7 @@ Page({
   onLoad: function (options) {
     console.log("user id in database:")
     console.log(app.globalData.userInfo._id)
+
   },
 
   /**
@@ -201,7 +202,7 @@ Page({
         })
     },
     //对应数据库的上传操作
-    //success风格是并行的wdnmd
+    //success风格是并行的wdnmd,以下为错误示例
     /*
     uploadImg: function(data){
       const db = wx.cloud.database()
@@ -281,82 +282,108 @@ Page({
     }*/
 
     uploadImg: function(data){
-      const db = wx.cloud.database()
+      console.log(data)
+      var i = data.i?data.i:0;
+      // success = data.success ? data.success : 0,
+      // fail = data.fail ? data.fail : 0;
       var detailPics = this.data.detailPics;
-      var i = this.data.i
-      var tmpPath = detailPics[i]
-      var type = tmpPath.slice(tmpPath.lastIndexOf('.')+1,tmpPath.length)
-      var time = formatTime(new Date());
-      var that = this
-      stickerCollection.add({
-        data:{
-          tags:[this.data.typeArray[this.data.typeIndex],
-          this.data.styleArray[this.data.styleIndex],
-          this.data.emgDescription],//2 fixed type + all description
-          img:"",//get a ret id + type
-          type:type,
-          uploadTime:time,
-          downloadTimes:0,
-          point:0,
-          commentTimes:0,
-          author:app.globalData.userInfo._id,//find in user collention?
-        },
-        success: function(res){
-          that.setData({
-            tmpStickerId:res._id,
-            tmpType:type
-          })
-          console.log(tmpPath)
-          console.log(type)
-          console.log(time)
+      console.log(detailPics)
+      if(detailPics.length!=0)
+      {
+        const db = wx.cloud.database()
+        var tmpPath = detailPics[i]
+        var type = tmpPath.slice(tmpPath.lastIndexOf('.')+1,tmpPath.length)
+        var time = formatTime(new Date());
+        var that = this
+        stickerCollection.add({
+          data:{
+            tags:[this.data.typeArray[this.data.typeIndex],
+            this.data.styleArray[this.data.styleIndex],
+            this.data.emgDescription],//2 fixed type + all description
+            img:"",//get a ret id + type
+            type:type,
+            uploadTime:time,
+            downloadTimes:0,
+            point:0,
+            commentTimes:0,
+            author:app.globalData.userInfo._id,//find in user collention?
+          },
+          success: (res)=>{
+            that.setData({
+              tmpStickerId:res._id,
+              tmpType:type
+            })
+            console.log(tmpPath)
+            console.log(type)
+            console.log(time)
 
-          //then upload img, path use id in collection
-          console.log("target cloud path:"+that.data.tmpStickerId+'.'+that.data.tmpType)
-          wx.cloud.uploadFile({
-            cloudPath: that.data.tmpStickerId+'.'+that.data.tmpType,//先上传表单生成id，再根据id命名？
-            filePath: detailPics[i], // 文件路径
-            success: function(res) {
-              //获取id和filepath之后再修改collection
-              console.log("uploadImg success")
-              console.log(res)
-              // 不知为什么在这里setData会卡住不运行，直接弃了
-              // that.setData({
-              //   tmpCloudPath:cloudPath,
-              //   tmpFileID:res.fileID
-              // })
-              console.log('get fileID'+res.fileID)//貌似后续操作是根据文件id而不是url和path
-              stickerCollection.doc(that.data.tmpStickerId).update({
-                data:{
-                  tags:[that.data.typeArray[that.data.typeIndex],
-                  that.data.styleArray[that.data.styleIndex],
-                  that.data.emgDescription],//2 fixed type + all description
-                  img:res.fileID,//get a ret id + type
-                  type:type,
-                  uploadTime:time,
-                  downloadTimes:0,
-                  point:0,
-                  commentTimes:0,
-                  author:app.globalData.userInfo._id,//find in user collention?
-                },
-                success: function(res){
-                  console.log("change sticker collection success")
-                  //加一个提示上传成功，然后全set空
-                },
-                fail: err=>{
-                  console.log("Err when change path in sticker collection")
-                }
-              })
-            },
-            fail: err => {//remove collention
-              // handle error
-              console.log("upload File error")
-            }
-          })
-        },
-        fail: err=>{
-          console.log("Err when create in sticker collection")
-        }
-      })
+            //then upload img, path use id in collection
+            console.log("target cloud path:"+that.data.tmpStickerId+'.'+that.data.tmpType)
+            wx.cloud.uploadFile({
+              cloudPath: that.data.tmpStickerId+'.'+that.data.tmpType,//先上传表单生成id，再根据id命名？
+              filePath: detailPics[i], // 文件路径
+              success: (res)=>{
+                //获取id和filepath之后再修改collection
+                console.log("uploadImg success")
+                console.log(res)
+                // 不知为什么在这里setData会卡住不运行，直接弃了
+                // that.setData({
+                //   tmpCloudPath:cloudPath,
+                //   tmpFileID:res.fileID
+                // })
+                console.log('get fileID'+res.fileID)//貌似后续操作是根据文件id而不是url和path
+                stickerCollection.doc(that.data.tmpStickerId).update({
+                  data:{
+                    tags:[that.data.typeArray[that.data.typeIndex],
+                    that.data.styleArray[that.data.styleIndex],
+                    that.data.emgDescription],//2 fixed type + all description
+                    img:res.fileID,//get a ret id + type
+                    type:type,
+                    uploadTime:time,
+                    downloadTimes:0,
+                    point:0,
+                    commentTimes:0,
+                    author:app.globalData.userInfo._id,//find in user collention?
+                  },
+                  success: (res)=>{
+                    console.log("change sticker collection success")
+                    //加一个提示上传成功，然后全set空
+
+                  },
+                  fail: (err)=>{
+                    console.log("Err when change path in sticker collection")
+                  },
+                  complete: () => {
+                    i++;
+                    console.log("in comlpete "+ String(i))//嵌套之后不能用that了就离谱,全是0也离谱
+                    if(i==detailPics.length)
+                    {
+                      console.log('上传图片完成')
+                    }
+                    else{
+                      data.i = i;
+                      // data.success = success;
+                      // data.fail = fail;
+                      console.log('recurrent')
+                      that.uploadImg(data);//递归，回调
+                    }
+                  }
+                })
+              },
+              fail: err => {//remove collention
+                // handle error
+                console.log("upload File error")
+              }
+            })
+          },
+          fail: err=>{
+            console.log("Err when create in sticker collection")
+          }
+        })
+      }
+      else{
+        console.log("no img to upload")
+      }
     }
     //点击上传按钮执行上传操作，对应url的服务器
     /*

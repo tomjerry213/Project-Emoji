@@ -16,7 +16,7 @@
         </view>
     </navigator>
     
-    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+    <navigator url="/pages/my_upload/my_upload" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
         <view class="cells">
             <image class="icon" src="/icons/cloud-HL.png"/>
             <text>我的上传</text>

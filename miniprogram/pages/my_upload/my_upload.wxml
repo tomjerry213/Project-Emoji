@@ -1,0 +1,14 @@
+<!--miniprogram/pages/my_upload/my_upload.wxml-->
+<!--一个做后端的不知名同学只会丑陋的用image做-->
+
+<view class="page__hd">
+        <view class="page_title">精选表情</view>
+        <view class="weui-grids">
+            <view class="weui-grid" wx:for="{{imageUrl}}">
+                <navigator url="{{item.url+'?name='+item.name}}">
+                    <image class="grid_emoji" src="{{item.img}}" mode="scaleToFill"/>
+                    <text class="grid_label">{{item.tag}}</text>
+                </navigator>
+            </view>
+        </view>
+    </view>

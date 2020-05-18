@@ -15,7 +15,25 @@ Page({
     author:'匿名',
     tags:["软工作业",'程序员','在改了','就硬拖'],
     type:'',
-    style:''
+    style:'',
+    numLike:0,
+    boolLike:false,
+    boolCollect:false
+  },
+
+  //点击“点赞”
+  clickLike: function () {
+    this.setData({
+      numLike:(this.data.numLike + 1),
+      boolLike:true
+    })
+  },
+
+  //点击“收藏”
+  clickCollect: function () {
+    this.setData({
+      boolCollect:true
+    })
   },
 
   /**

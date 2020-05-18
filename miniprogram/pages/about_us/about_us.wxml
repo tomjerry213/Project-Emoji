@@ -1,0 +1,15 @@
+<!--category.wxml-->
+
+<view class="header">
+    <image class="poster" src="/images/poster.jpg" mode="scaleToFill"/>
+</view>
+
+<view class="page">
+
+    <view class="page__hd">
+        <view class="page_title">关于我们</view>
+        
+    </view>
+    <text>我们是不知名的软工小组\n</text>
+    <text>来观摩我们的项目！\nhttps://github.com/tomjerry213/Project-Emoji</text>
+</view>

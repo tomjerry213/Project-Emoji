@@ -21,21 +21,32 @@
     <view class="page__hd">
       <view class="weui-grids">
           <view class="weui-grid tags_grid" wx:for="{{tags}}">
-              <text type="button" class="class_tags">{{item}}</text> 
+              <text type="button" class="class_tags">{{item}}</text>
           </view>
+        <text>表情包作者：{{author}}\n</text>
+        <text>获得的点赞数：{{numLike}}</text>
       </view>
     </view>
 
-<!-- like & collect 我还没写完,不写了,wxss还没搞先做了demo再说 -->
-    <view class="cells">
-      <image class="icon" src="/icons/like-HL.png"  />
+<!-- like & collect  -->
+    <view class="cells" bindtap="clickLike" wx:if="{{boolLike == false}}">
+      <image class="icon" src="/icons/like-HL.png"/>
       <text>点赞</text>
     </view>
+    <view class="cells" wx:if="{{boolLike == true}}">
+      <image class="icon" src="/icons/like-HL.png"/>
+      <text>已点赞</text>
+    </view>
 
-    <view class="cells">
-      <image class="icon" src="/icons/star-HL.png"  />
+    <view class="cells" bindtap="clickCollect" wx:if="{{boolCollect == false}}">
+      <image class="icon" src="/icons/star-HL.png"/>
       <text>收藏</text>
     </view>
+    <view class="cells" wx:if="{{boolCollect == true}}">
+      <image class="icon" src="/icons/star-HL.png"/>
+      <text>已收藏</text>
+    </view>
+
   </view>
 
 

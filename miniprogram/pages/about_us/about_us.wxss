@@ -1,5 +1,4 @@
-/* miniprogram/pages/my_upload/my_upload.wxss */
-
+/* miniprogram/pages/category/category.wxss */
 @import '/style/weui.wxss';
 
 page{

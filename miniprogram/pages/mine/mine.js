@@ -8,6 +8,11 @@ Page({
 
   },
 
+  clickMyCollection: function(){
+    wx.navigateTo({
+      url: '../my_collection/my_collection',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

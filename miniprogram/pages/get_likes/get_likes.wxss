@@ -1,5 +1,4 @@
-/* miniprogram/pages/my_upload/my_upload.wxss */
-
+/* miniprogram/pages/category/category.wxss */
 @import '/style/weui.wxss';
 
 page{
@@ -117,3 +116,13 @@ text.grid_label{
     padding: 0px;
     color: #888888;
 }
+
+/* for cell icons */
+.cells{
+    padding: 10px;
+    font-weight: bold;
+    background-color: rgb(255, 255, 255);
+    border-bottom: 1px lightgray solid;
+  
+    
+  }

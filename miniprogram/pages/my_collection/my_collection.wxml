@@ -1,17 +1,15 @@
-<!--miniprogram/pages/my_upload/my_upload.wxml-->
-
+<!--category.wxml-->
 
 <view class="page">
 
     <view class="page__hd">
-        <view class="page_title">我上传的表情包</view>
+        <view class="page_title">我收藏的表情包</view>
         
     </view>
     <view class="weui-grids">
-        <view class="weui-grid" wx:for="{{imageUrl}}" wx:key="name">
+        <view class="weui-grid" wx:for="{{figTypeRouters}}" wx:key="name">
              <navigator url="{{item.url+'?name='+item.name}}">
                 <image class="grid_emoji" src="{{item.icon}}" mode="scaleToFill"/>
-                <text class="grid_label">{{item.tag}}</text>
             </navigator>
         </view>
     </view>

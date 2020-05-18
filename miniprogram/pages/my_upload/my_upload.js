@@ -19,21 +19,22 @@ Page({
      wx.cloud.callFunction({
        name:"getStickerOfUser",
        data:{
-         stickerList:app.globalData.userInfo.stickerList
+         userID:app.globalData.userInfo._id
        },
       
-       success:function(res){
-          console.log(res)
-          const data =res.result.stickerUrlList.data;
-          console.log(data)
-          const temp = new Array();
+       success(res){
+          console.log(res.result.stickerUrlList)
+          console.log(res.result.userID)
+          const data =res.result.stickerUrlList.data
+          //console.log(data)
+          const temp = new Array()
           for(let i = 0;i<data.length;i++)
           {
             temp.push({"img":data[i].img,"tag":data[i].tags})
           }
           that.setData({imageUrl:temp})
        },
-       fail:function(res){
+       fail(res){
          console.log(res)
        },
      })

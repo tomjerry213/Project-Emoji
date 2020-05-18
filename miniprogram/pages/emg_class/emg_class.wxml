@@ -16,7 +16,7 @@
 
     <view class="search" bindtap="search">
         <!-- <icon class="searchicon" size='14' type='search'></icon> -->
-        <input class="search_input" disabled placeholder="换个关键词试试吧=v=🔍" bindtap='search'/>
+        <input class="search_input" disabled placeholder="🔍换个关键词试试吧=v=" bindtap='search'/>
         <view class="search_button" bindtap="search">搜表情</view>
     </view>
 

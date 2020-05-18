@@ -3,12 +3,12 @@
 
 <!--这里以后可以设计一张好看的海报-->
 <view class="header">
-    <image class="poster" src="/images/poster2.jpg" mode="scaleToFill"/>
+    <image class="poster" src="/images/poster.jpg" mode="scaleToFill"/>
 </view>
 
 <view class="search" bindtap="search">
     <!-- <icon class="searchicon" size='14' type='search'></icon> -->
-    <input class="search_input" disabled placeholder="点击搜索表情包OvO🔍" bindtap='search'/>
+    <input class="search_input" disabled placeholder="🔍点击搜索表情包OvO" bindtap='search'/>
     <view class="search_button" bindtap="search">搜表情</view>
 </view>
 

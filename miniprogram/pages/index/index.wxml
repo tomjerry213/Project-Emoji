@@ -2,12 +2,12 @@
 
 <!--这里以后可以设计一张好看的海报-->
 <view class="header">
-    <image class="poster" src="/images/poster.jpg" mode="scaleToFill"/>
+    <image class="poster" src="/images/street_sakura.jpg" mode="scaleToFill"/>
 </view>
 
 <view class="search" bindtap="search">
     <!-- <icon class="searchicon" size='14' type='search'></icon> -->
-    <input class="search_input" disabled placeholder="点击搜索表情包OvO🔍" bindtap='search'/>
+    <input class="search_input" disabled placeholder="🔍点击搜索表情包OvO" bindtap='search'/>
     <view class="search_button" bindtap="search">搜表情</view>
 </view>
 
@@ -17,13 +17,13 @@
         <view class="page_title">热门搜索</view>
         <view class="weui-grids">
             <!-- just for show here -->
-            <view class="weui-grid hot_search_grid" wx:for="{{hot_searches}}" bindtap='tapHotWords'>
+            <view class="weui-grid hot_search_grid" wx:for="{{hotSearches}}" bindtap='tapHotWords'>
                 <text type="button" class="hot_search_word" bindtap='tapHotWords'>{{item}}</text> 
             </view>
         </view>
     </view>
 
-    <view class="page__hd">
+    <view class="page__hd" style="background-color:#FFFACD;">
         <view class="page_title">精选表情</view>
         <view class="weui-grids">
             <view class="weui-grid" wx:for="{{recRouters}}" wx:key="name">
@@ -35,7 +35,7 @@
         </view>
     </view>
 
-    <view class="page__hd">
+    <view class="page__hd" style="background-color:#FFE4E1;">
         <view class="page_title">为你推荐</view>
         <view class="weui-grids">
             <view class="weui-grid" wx:for="{{hotRouters}}" wx:key="name">

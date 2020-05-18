@@ -306,6 +306,7 @@ Page({
             downloadTimes:0,
             point:0,
             commentTimes:0,
+            likeTimes:0,
             author:app.globalData.userInfo._id,//find in user collention?
           },
           success: (res)=>{

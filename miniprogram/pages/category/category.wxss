@@ -35,7 +35,7 @@ image.poster{
 }
 
 .search_input {
-    width: 80%; height: fill;
+    width: 60%; height: fill;
     position: relative;
     padding: 3px;
     margin: 0px;
@@ -55,6 +55,7 @@ image.poster{
     border: 1px gray solid;
     border-left: none;
     position: relative;
+    width: 20%;
     height: fill;
     align-items: center;
     flex-direction: row;

@@ -1,6 +1,6 @@
 
 
-<view class='content'>
+<view class='content' style="background-color:#87CEFA;">
 
   <view class='img-box'>
     <view class='img-list'>
@@ -10,7 +10,7 @@
           <image src='{{item}}' bindlongpress="bindLongPressimg" data-id='{{index}}' bindtap="previewImage" mode="aspectFill"></image>
         </view>
       </block>
-      <view class='chooseimg' bindtap='uploadDetailImage'>
+      <view class='chooseimg' bindtap='uploadDetailImage' style="background-color:#87CEFA;">
         <view class="weui-uploader__input-box"></view>
       </view>
     </view>
@@ -22,33 +22,33 @@
 
 
 
-<view class="section">
-  <view class="section__title">选择表情包类别</view>
+<view class="section" style="background-color:#FFFACD;">
+  <view class="section__title" style="background-color:#FFFACD;"> 选择表情包类别</view>
   <picker bindchange="bindTypeChange" value="{{typeIndex}}" range="{{typeArray}}">
-    <view class="picker">
-      当前选择：{{typeArray[typeIndex]}}
+    <view class="picker" style="background-color:#FFFACD;">
+      {{typeArray[typeIndex]}}
     </view>
   </picker>
 </view>
-<view class="section">
-  <view class="section__title">选择表情包风格</view>
+<view class="section" style="background-color:#7FFFAA;">
+  <view class="section__title" style="background-color:#7FFFAA;"> 选择表情包风格</view>
   <picker bindchange="bindStyleChange" value="{{styleIndex}}" range="{{styleArray}}">
-    <view class="picker">
-      当前选择: {{styleArray[styleIndex]}}
+    <view class="picker" style="background-color:#7FFFAA;">
+       {{styleArray[styleIndex]}}
     </view>
   </picker>
 </view>
 
-<view class="section">
-  <view class="section__title">选择目标文件夹</view>
+<view class="section" style="background-color:#FFE4E1;">
+  <view class="section__title" style="background-color:#FFE4E1;"> 选择目标文件夹</view>
   <picker bindchange="bindFolderChange" value="{{folderIndex}}" range="{{folderArray}}">
-    <view class="picker">
-      当前选择: {{folderArray[folderIndex]}}
+    <view class="picker" style="background-color:#FFE4E1;">
+      {{folderArray[folderIndex]}}
     </view>
   </picker>
 </view>
 <view class="section">
-  <view class="section__title">请输入对表情包的描述</view>
+  <view class="section__title"> 请输入对表情包的描述</view>
   <view style="border: 1px solid #5c5c5c; border-radius: 10px; margin:10px; height:100px;">
       <textarea placeholder-class="place-holder"  placeholder="" name="introduction" maxlength='30' bindinput='limit' value="{{text}}" style="font-size: 13px; margin:10px; height:100px;"/>
         <!-- 显示字数 -->

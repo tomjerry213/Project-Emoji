@@ -94,6 +94,7 @@
   color: #666;
   font-size: 24rpx;
   padding-bottom: 20rpx;
+  margin-top:100;
 }
 
 .img-box {
@@ -127,6 +128,17 @@
   background-size: cover;
   margin-top: 20rpx;
   background-color: white;
-  font-size: 32rpx;
+  font-size: 40rpx;
   color: #007aff;
+  text-align: center;
+  font-weight:bolder;
+}
+
+.section__title{
+  background-size: cover;
+  margin-top: 20rpx;
+  background-color: white;
+  font-size: 32rpx;
+  color: black;
+  text-align: center;
 }

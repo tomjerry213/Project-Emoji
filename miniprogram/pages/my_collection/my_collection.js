@@ -14,71 +14,21 @@ Page({
         figTypeRouters: [
             {
                 name: '动漫',
-                url: '/pages/emg_class/emg_class',
+                url: '/pages/emg_display/emg_display',
                 icon: '/emg_type/rec_0.jpg',
-
+                tag: ["软工作业",'程序员','在改了','就硬拖']
             },
-            {
-                name: '人像',
-                url: '/pages/emg_class/emg_class',
-                icon: '/emg_type/rec_1.jpg',
-            },
-            {
-                name: '简笔',
-                url: '/pages/emg_class/emg_class',
-                icon: '/emg_type/rec_2.jpg',
-            },
-            {
-                name: '动漫GIF',
-                url: '/pages/emg_class/emg_class',
-                icon: '/emg_type/吃.gif',
-            },
-            {
-                name: '人像GIF',
-                url: '/pages/emg_class/emg_class',
-                icon: '/emg_type/rec_4.jpg',
-            },
-            {
-                name: '其他',
-                url: '/pages/emg_class/emg_class',
-                icon: '/emg_type/rec_5.jpg',
-            },
-
         ],
-        styleRouters: [
-            {
-                name: '正经',
-                url: '/pages/emg_class/emg_class',
-                icon: '/emg_style/rec_0.jpg',
-
-            },
-            {
-                name: '复古',
-                url: '/pages/emg_class/emg_class',
-                icon: '/emg_style/祝愿.jpg',
-            },
-            {
-                name: '悲伤',
-                url: '/pages/emg_class/emg_class',
-                icon: '/emg_style/rec_2.jpg',
-            },
-            {
-                name: '快乐',
-                url: '/pages/emg_class/emg_class',
-                icon: '/emg_style/rec_3.jpg',
-            },
-            {
-                name: '互损',
-                url: '/pages/emg_class/emg_class',
-                icon: '/emg_style/rec_4.jpg',
-            },
-            {
-                name: '其他',
-                url: '/pages/emg_class/emg_class',
-                icon: '/emg_style/rec_5.jpg',
-            },
-        ]
     },
+
+    jumpDisplay: function (event) {
+        var tmpItem = event.currentTarget.dataset.item;
+        var tmpUrl = tmpItem.url+'?ImgUrl='+tmpItem.icon+'&tags='+JSON.stringify(tmpItem.tag)+'&numLike=1&boolLike=true&boolCollect=true&author=匿名'
+        wx.navigateTo({
+            url: tmpUrl
+        })
+    },
+
     //for search bar
     search: function () {
         wx.navigateTo({

@@ -9,6 +9,13 @@ Page({
     imageUrl:[]
   },
 
+  jumpDisplay: function (event) {
+    var tmpItem = event.currentTarget.dataset.item;
+    var tmpUrl = '../emg_display/emg_display?ImgUrl='+tmpItem.img+'&tags='+JSON.stringify(tmpItem.tag)+'&numLike=0&boolLike=false&boolCollect=false&author=KAISHUI'
+    wx.navigateTo({
+        url: tmpUrl
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

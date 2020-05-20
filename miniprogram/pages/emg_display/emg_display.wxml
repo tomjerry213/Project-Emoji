@@ -23,9 +23,9 @@
           <view class="weui-grid tags_grid" wx:for="{{tags}}">
               <text type="button" class="class_tags">{{item}}</text>
           </view>
-        <text>表情包作者：{{author}}\n</text>
-        <text>获得的点赞数：{{numLike}}</text>
       </view>
+      <text>表情包作者：{{author}}\n</text>
+        <text>获得的点赞数：{{numLike}}</text>
     </view>
 
 <!-- like & collect  -->

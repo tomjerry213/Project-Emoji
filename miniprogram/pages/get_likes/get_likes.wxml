@@ -7,7 +7,7 @@
         
     </view>
     <view class="cells" bindtap="clickLike">
-      <image class="icon" src="/emg_hot/rec_0.jpg"/>
+      <image class="icon" src="/emg_hot/timg.gif"/>
       <text>收获了点赞: 1</text>
     </view>
 </view>

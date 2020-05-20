@@ -11,7 +11,8 @@ Page({
      *  load from database please also load its features
      * some are just for demo 
     */
-    ImgUrl:'/emg_type/rec_0.jpg',
+    //ImgUrl:'/emg_type/rec_0.jpg',
+    ImgUrl:'',
     author:'匿名',
     tags:["软工作业",'程序员','在改了','就硬拖'],
     type:'',
@@ -41,9 +42,20 @@ Page({
    */
   onLoad: function (options) {
     var inpVal = options.ImgUrl
+    var inpTag = JSON.parse(options.tags)
+    var inpLike = JSON.parse(options.numLike)
+    var inpBoolLike = JSON.parse(options.boolLike)
+    var inpBoolCollect = JSON.parse(options.boolCollect)
+    var inpAuthor = options.author
     console.log(inpVal)
+    console.log(inpBoolLike)
     this.setData({
-      ImgUrl: inpVal//["detail"]["ImgUrl"]//or other
+      ImgUrl: inpVal,
+      tags: inpTag,
+      numLike: inpLike,
+      boolLike: inpBoolLike,
+      boolCollect: inpBoolCollect,
+      author: inpAuthor
     })
   },
 

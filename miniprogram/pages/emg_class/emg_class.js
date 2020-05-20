@@ -20,6 +20,7 @@ Page({
     className:"xxx",//get name onload, search in db
     rpp:20,
     loading:false,//开始true, load结束后改为false
+    testtags:["软工作业",'程序员','在改了','就硬拖'],
 
     testUrl: '/emg_test/rec_0.jpg',
     // while linked to database ,change wxml and use here and load more
@@ -51,7 +52,7 @@ Page({
   lookPhoto: function(event) {
     var that = this;
     var id = (event.currentTarget.id);
-    var url = '../emg_display/emg_display?ImgUrl=' + this.data.testUrl;
+    var url = '../emg_display/emg_display?ImgUrl=' + this.data.testUrl+'&tags='+JSON.stringify(this.data.testtags)+'&numLike=0&boolLike=false&boolCollect=false&author=匿名';
     console.log(url)
     wx.navigateTo({
       url: url

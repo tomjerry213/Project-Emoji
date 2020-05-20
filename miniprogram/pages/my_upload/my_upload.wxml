@@ -9,10 +9,8 @@
     </view>
     <view class="weui-grids">
         <view class="weui-grid" wx:for="{{imageUrl}}">
-             <navigator url="{{item.url+'?name='+item.name}}">
-                <image class="grid_emoji" src="{{item.img}}" mode="scaleToFill"/>
+                <image class="grid_emoji" src="{{item.img}}" mode="scaleToFill" bindtap="jumpDisplay" data-item="{{item}}"/>
                 <text class="grid_label">{{item.tag}}</text>
-            </navigator>
         </view>
     </view>
 </view>

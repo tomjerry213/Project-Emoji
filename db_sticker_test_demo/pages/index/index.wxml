@@ -1,0 +1,54 @@
+<input placeholder="type the image ID" bindinput="getImgIdUI" />
+<input placeholder="type the Tag" bindinput="getTagUI" />
+<input placeholder="type the author ID" bindinput="getAuthorUI" />
+<input placeholder="type the others" bindinput="getOthersUI" />
+
+<view>
+<button bindtap="showData">show Data</button>
+
+<button bindtap="appendStickerUI">上传图片</button>
+<button bindtap="deleteStickerUI">通过ID删除图片</button>
+<button bindtap="getStickerByIdUI">通过ID获取图片</button>
+<button bindtap="downloadSticker">download file</button>
+
+<button bindtap="listStickerByTagUI">通过tag获取图片</button>
+<button bindtap="listStickerByDownloadTimesUI">通过下载量获取图片</button>
+<button bindtap="listStickerByPointUI">通过评分获取图片</button>
+<button bindtap="listStickerByPersonalInterestUI">通过兴趣获取图片</button>
+<button bindtap="listStickerByAuthorUI">通过作者获取图片</button>
+</view>
+
+
+<view>
+<button bindtap="getPointUI">获取图片得分</button>
+<button bindtap="modifyPointByIdUI">通过ID修改图片得分</button>
+
+<button bindtap="getDownloadTimesUI">获取图片下载次数</button>
+<button bindtap="modifyDownloadTimesByIdUI">通过ID修改图片下载次数</button>
+
+<button bindtap="getTagsUI">获取图片tag</button>
+<button bindtap="modifyTagByIdUI">通过ID修改图片tag</button>
+
+
+<button bindtap="getNumUI">获取图片总数</button>
+
+
+
+</view>
+
+
+
+<!--
+    <button bindtap="modifyNumUI">修改图片总数</button>
+<image src="{{imgUrl}}"></image>
+<button bindtap="upfile">上传文件</button>
+
+<input placeholder="typetype" bindinput="addtype"></input>
+<input placeholder="typetags" bindinput="addtags"></input>
+<button bindtap="addData" type="primary">添加数据</button>
+<button bindtap="searchData">喜欢廖一凡</button>
+<input placeholder="id" bindinput="deleteSth"></input>
+<button bindtap="delData">删除数据</button>
+
+<button bindtap="cloud1">云函数</button>
+-->

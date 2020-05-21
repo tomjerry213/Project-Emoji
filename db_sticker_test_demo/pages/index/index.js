@@ -11,7 +11,8 @@ let global_others=0
 Page({
   data:{
     cloudPath:"",
-    id:""
+    id:"",
+    httpPath:""
 
   },
   //the following 3 func are to get the input and
@@ -20,6 +21,7 @@ Page({
   showData(){
     console.log(this.cloudPath)
     console.log(this.id)
+    console.log(this.httpPath)
 
   },
   getImgIdUI(input){
@@ -51,7 +53,7 @@ Page({
     let that=this
     
     wx.chooseImage({
-      count: 9,//maxinum for 1
+      count: 9,//maximum to 9
       sizeType: ['original','compressed'],
       sourceType: ['album','camera'],
       success: (res)=>{
@@ -112,6 +114,7 @@ Page({
     }
   },
   //delete the db item
+  //every time you can only delete one of it
   //what the hell is the res?? why can be parsed via cloud?
   deleteStickerInfo(imgId){
     console.log(imgId);
@@ -139,10 +142,13 @@ Page({
   },
   
   //we returned all the db info  
-  //
+  //this function has stored the cloudpath into the Page.data.cloudpath
+  //the rest info is stored in result
+  // the diff between this and the following is that this func return the URL begin with cloud://
+  //while the following one with http://temp
   getStickerByIdUI(){
     let that= this
-    let temp=""
+    let result=""
     wx.cloud.callFunction({
       name:"getStickerById",
       data:{
@@ -150,20 +156,23 @@ Page({
       },
       success:(res)=>{
         console.log("get sticker by id succeed",res)
-        temp=res.result.data.fileId
-        that.cloudPath=temp
+        result=res.result.data
+        that.cloudPath=result.fileId
       },
       fail:(res)=>{
         console.log("get sticker by id failed",res)
       }
     })
   },
+  //besides return the httpPath
   downloadSticker(){
     let that= this
     wx.cloud.downloadFile({
-      fileID: that.cloudPath, // 文件 ID
+      fileID: that.cloudPath, // 
       success: res => {
         console.log("download file succeed",res)
+        that.httpPath=res.tempFilePath
+        that.saveToLocal(that.httpPath)
       },
       fail(res){
         console.log("download file failed",res)
@@ -171,6 +180,27 @@ Page({
       }
     })
     
+  },
+  //as the name implies
+  saveToLocal(path){
+    wx.saveImageToPhotosAlbum({　　　　　　　　　//保存到本地
+      filePath: path,
+      success(res) {
+        console.log("save to local succeed",res)
+      },
+      fail(res) {
+        if (res.errMsg === "saveImageToPhotosAlbum:fail auth deny") {
+          console.log("save to local failed due to no authentication",res)
+          console.log("attention!:the user has blocked us from writing files")
+          console.log("need re-apply for the rights")
+          console.log("for more details:https://blog.csdn.net/weixin_42401132/article/details/94175340")
+          console.log("greetings from backend ")      
+        }
+        else{
+          console.log("save to local failed",res)
+        }
+      }
+    })
   },
   //list series
   listStickerByTagUI(){

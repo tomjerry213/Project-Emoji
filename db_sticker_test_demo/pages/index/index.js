@@ -42,28 +42,39 @@ Page({
     //for test
     return true
   },
+
   //the following func are manipulating the imgs
   //including getting the img and search the image
+  
+  
   appendStickerUI(){
     let that=this
     
     wx.chooseImage({
-      count: 1,//maxinum for 1
+      count: 9,//maxinum for 1
       sizeType: ['original','compressed'],
       sourceType: ['album','camera'],
       success: (res)=>{
         let imgRes=res
-        wx.cloud.uploadFile({
-          cloudPath: new Date().getTime()+Math.floor(Math.random()*100)+".png",
-          filePath:res.tempFilePaths[0],
-          success:(res)=>{
-            console.log("upload file succeed",res)
-            that.appendStickerInfo(imgRes,res.fileID)
-          },
-          fail:(res)=>{
-            console.log("upload file failed",res)
+        console.log("choose img succeed",res)
+        if (res.tempFilePaths.length == 0) {
+          return;
+        }
+        else{
+          for(let i=0;i<res.tempFilePaths.length;i++){
+            wx.cloud.uploadFile({
+              cloudPath: new Date().getTime()+Math.floor(Math.random()*100)+".png",
+              filePath:res.tempFilePaths[i],
+              success:(res)=>{
+                console.log("upload file succeed:",i,res)
+                that.appendStickerInfo(imgRes,res.fileID)
+              },
+              fail:(res)=>{
+                console.log("upload file failed",res)
+              }
+            })
           }
-        })
+        }
       },
       fail: (res)=>{
         console.log("choose file failed",res)
@@ -72,6 +83,7 @@ Page({
   },
   //add the DB info of a img
   //add op shall not use the cloud funcs
+  //delete the property of author, using the _openid to identify the user 
   appendStickerInfo(info,cloudPath){
     db.add({
       data:{
@@ -82,7 +94,7 @@ Page({
         downloadTimes:0,
         point:0,
         commentTimes:0,
-        author:"use openid instead",
+
         fileId:cloudPath
       },
       success:(res)=>{

@@ -25,26 +25,20 @@
           </view>
       </view>
       <text>表情包作者：{{author}}\n</text>
-        <text>获得的点赞数：{{numLike}}</text>
+        
     </view>
 
 <!-- like & collect  -->
-    <view class="cells" bindtap="clickLike" wx:if="{{boolLike == false}}">
-      <image class="icon" src="/icons/like-HL.png"/>
-      <text>点赞</text>
-    </view>
-    <view class="cells" wx:if="{{boolLike == true}}">
-      <image class="icon" src="/icons/like-HL.png"/>
-      <text>已点赞</text>
+    <view class="cells" bindtap="changeLikeStatus">
+        <image class="icon" src="/icons/like.png" wx:if="{{boolLike == false}}"/>
+        <image class="icon" src="/icons/like-HL.png" wx:if="{{boolLike == true}}"/>
+        <text> {{numLike}}</text>
     </view>
 
-    <view class="cells" bindtap="clickCollect" wx:if="{{boolCollect == false}}">
-      <image class="icon" src="/icons/star-HL.png"/>
-      <text>收藏</text>
-    </view>
-    <view class="cells" wx:if="{{boolCollect == true}}">
-      <image class="icon" src="/icons/star-HL.png"/>
-      <text>已收藏</text>
+    <view class="cells" bindtap="changeStarStatus">
+        <image class="icon" src="/icons/star.png" wx:if="{{boolStar == false}}"/>
+        <image class="icon" src="/icons/star-Y.png" wx:if="{{boolStar == true}}"/>
+        <text> {{numStar}}</text>
     </view>
 
   </view>

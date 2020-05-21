@@ -165,6 +165,7 @@ Page({
     })
   },
   //besides return the httpPath
+  
   downloadSticker(){
     let that= this
     wx.cloud.downloadFile({

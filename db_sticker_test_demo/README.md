@@ -11,7 +11,6 @@
       env: 'emoji-sxwx4' // 此处应该修改为对应的环境编号
     })
   },
-  ```
 
 2. project.config.json中应该具有"cloudfunctionRoot": "cloud/"的项
 3. 每一个云函数的const db=cloud.database().collection("test")中的test字样应该更改为对应的表名

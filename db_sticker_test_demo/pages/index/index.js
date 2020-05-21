@@ -19,7 +19,7 @@ Page({
     databaseImgNum:"",
     tags:""
   },
-  //the following 3 func are to get the input and
+  //the following  func are to get the input and
   //transform into the global variables
   //for test 
   showData() {
@@ -234,7 +234,7 @@ Page({
       this.image_URL.push(info[0].fileId)
     }
   },
-  //sth wrong with cloud func
+  //sth wrong with cloud func but ok the the UI func
   listStickerByDownloadTimesUI() {
     let that=this
     wx.cloud.callFunction({
@@ -252,7 +252,7 @@ Page({
       }
     })
   },
-  //sth wrong
+  //sth wrong with cloud func but ok the the UI func
   listStickerByPointUI() {
     let that=this
     wx.cloud.callFunction({
@@ -282,6 +282,7 @@ Page({
       }
     })
   },
+  //ok
   listStickerByAuthorUI() {
     let that=this
     wx.cloud.callFunction({

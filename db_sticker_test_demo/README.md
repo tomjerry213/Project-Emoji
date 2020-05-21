@@ -12,9 +12,11 @@
     })
   },
   ```
-2.project.config.json中应该具有"cloudfunctionRoot": "cloud/"的项
-3.每一个云函数的const db=cloud.database().collection("test")中的test字样应该更改为对应的表名
-4.云函数需要部署方可使用。具体方法见google
+
+2. project.config.json中应该具有"cloudfunctionRoot": "cloud/"的项
+3. 每一个云函数的const db=cloud.database().collection("test")中的test字样应该更改为对应的表名
+4. 云函数需要部署方可使用。具体方法见google
+
 ### usage for UI connection
 1. make sure that everyinput is valid or the cloud func will return error
 2. index.js中前6个函数为测试用函数，其中第六个需要补全。非必需

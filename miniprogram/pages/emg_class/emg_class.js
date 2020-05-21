@@ -52,7 +52,7 @@ Page({
   lookPhoto: function(event) {
     var that = this;
     var id = (event.currentTarget.id);
-    var url = '../emg_display/emg_display?ImgUrl=' + this.data.testUrl+'&tags='+JSON.stringify(this.data.testtags)+'&numLike=0&boolLike=false&boolCollect=false&author=匿名';
+    var url = '../emg_display/emg_display?ImgUrl=' + this.data.testUrl+'&tags='+JSON.stringify(this.data.testtags)+'&numLike=0&numStar=0&author=匿名';
     console.log(url)
     wx.navigateTo({
       url: url

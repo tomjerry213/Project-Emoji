@@ -44,8 +44,6 @@ text.grid_label{
   font-weight: bold;
   background-color: rgb(255, 255, 255);
   border-bottom: 1px lightgray solid;
-
-  
 }
 
 image.icon{

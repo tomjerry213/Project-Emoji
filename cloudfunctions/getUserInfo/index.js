@@ -21,6 +21,8 @@ exports.main = async (event, context) => {
                 privilege: 2, // 默认权限是普通该用户
                 score: 0,
                 stickerList: [],
+                likeList: [],
+                starList: [],
                 followedUserList: []
             }
         });

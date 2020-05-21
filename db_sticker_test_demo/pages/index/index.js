@@ -13,7 +13,11 @@ Page({
     cloudPath: "",
     httpPath: "",
     image_info: "", // an array stored info of DB need to be parsed to extract URL
-    image_URL: ""
+    image_URL: "",
+    point:"",
+    downloadTimes:"",
+    databaseImgNum:"",
+    tags:""
   },
   //the following 3 func are to get the input and
   //transform into the global variables
@@ -230,8 +234,9 @@ Page({
       this.image_URL.push(info[0].fileId)
     }
   },
-  //sth wrong
+  //sth wrong with cloud func
   listStickerByDownloadTimesUI() {
+    let that=this
     wx.cloud.callFunction({
       name: "listStickerByDownloadTimes",
       data: {
@@ -239,6 +244,8 @@ Page({
       },
       success: (res) => {
         console.log("list sticker  By DownloadTimes succeed", res)
+        that.image_info = res.result.data
+        that.extractInfo(that.image_info)
       },
       fail: (res) => {
         console.log("list sticker  By DownloadTimes failed", res)
@@ -247,6 +254,7 @@ Page({
   },
   //sth wrong
   listStickerByPointUI() {
+    let that=this
     wx.cloud.callFunction({
       name: "listStickerByPoint",
       data: {
@@ -254,6 +262,8 @@ Page({
       },
       success: (res) => {
         console.log("list Sticker By Point succeed", res)
+        that.image_info = res.result.data
+        that.extractInfo(that.image_info)
       },
       fail: (res) => {
         console.log("list Sticker By Point failed", res)
@@ -273,6 +283,7 @@ Page({
     })
   },
   listStickerByAuthorUI() {
+    let that=this
     wx.cloud.callFunction({
       name: "listStickerByAuthor",
       data: {
@@ -280,6 +291,8 @@ Page({
       },
       success: (res) => {
         console.log("list Sticker By author succeed", res)
+        that.image_info = res.result.data
+        that.extractInfo(that.image_info)
       },
       fail: (res) => {
         console.log("list Sticker By author failed", res)
@@ -288,7 +301,7 @@ Page({
   },
   //the following func are for Point
   getPointUI() {
-    let temp_point = 0;
+    let that=this
     wx.cloud.callFunction({
       name: "getStickerById",
       data: {
@@ -296,8 +309,8 @@ Page({
       },
       success: (res) => {
         console.log("get Point by id succeed", res)
-        temp_point = res.result.data.point
-        console.log("the value is ", temp_point)
+        that.point = res.result.data.point
+        //console.log("the value is ", that.point)
       },
       fail: (res) => {
         console.log("get Point by id failed", res)
@@ -321,7 +334,7 @@ Page({
   },
   //the following func are for downloadtimes
   getDownloadTimesUI() {
-    let temp_downloadTimes = 0;
+    let that = this;
     wx.cloud.callFunction({
       name: "getStickerById",
       data: {
@@ -329,8 +342,8 @@ Page({
       },
       success: (res) => {
         console.log("get downloadTimes by id succeed", res)
-        temp_downloadTimes = res.result.data.downloadTimes
-        console.log("the value is ", temp_downloadTimes)
+        that.downloadTimes = res.result.data.downloadTimes
+        //console.log("the value is ", that.downloadTimes)
       },
       fail: (res) => {
         console.log("get downloadTimes by id failed", res)
@@ -355,7 +368,7 @@ Page({
 
   //the following func are for tags
   getTagsUI() {
-    let temp_tags = "";
+    let that=this;
     wx.cloud.callFunction({
       name: "getStickerById",
       data: {
@@ -363,14 +376,15 @@ Page({
       },
       success: (res) => {
         console.log("get tags by id succeed", res)
-        temp_tags = res.result.data.tags
-        console.log("the value is ", temp_tags)
+        that.tags = res.result.data.tags
+        //console.log("the value is ", that.tags)
       },
       fail: (res) => {
         console.log("get tags by id failed", res)
       }
     })
   },
+
   //need further implement make it a array rather than string
   modifyTagByIdUI() {
     wx.cloud.callFunction({
@@ -389,12 +403,13 @@ Page({
   },
   //the following func are for the num
   getNumUI() {
+    let that=this
     wx.cloud.callFunction({
       name: "getNum",
       success: (res) => {
         console.log("get Sticker Num succeed", res)
-        console.log("the value is", res.result.total)
-
+        that.databaseImgNum=res.result.total
+        //console.log("the value is", res.result.total)
       },
       fail: (res) => {
         console.log("get Sticker Num failed", res)

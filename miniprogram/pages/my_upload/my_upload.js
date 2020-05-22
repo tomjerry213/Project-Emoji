@@ -8,6 +8,39 @@ Page({
     //这是个数组
     imageUrl:[]
   },
+  // 理论上是一样的
+  // listStickerByAuthorUI() {
+  //   let that=this
+  //   wx.cloud.callFunction({
+  //     name: "listStickerByAuthor",
+  //     data: {
+  //       value: global_author_id
+  //     },
+  //     success: (res) => {
+  //       console.log("list Sticker By author succeed", res)
+  //       that.image_info = res.result.data
+  //       that.extractInfo(that.image_info)
+  //     },
+  //     fail: (res) => {
+  //       console.log("list Sticker By author failed", res)
+  //     }
+  //   })
+  // },
+  // extractInfo(info) {
+  //   var image_URL = new Array()
+  //   console.log(info)
+  //   for (let i = 0; i < info.length; ++i) {
+  //     image_URL.push({
+  //       id:i+1,
+  //       url:info[i].img
+  //     })
+  //   }
+  //   console.log("image_URL",image_URL)
+  //   var that = this
+  //   this.setData({
+  //     photos: image_URL
+  //   })
+  // },
 
   jumpDisplay: function (event) {
     var tmpItem = event.currentTarget.dataset.item;
@@ -21,14 +54,14 @@ Page({
    */
    onLoad: function (options) {
      const app = getApp()
-     console.log(app.globalData.userInfo.stickerList)
+     console.log(app.globalData.userInfo._id)
      var that = this
      wx.cloud.callFunction({
        name:"getStickerOfUser",
        data:{
          userID:app.globalData.userInfo._id
        },
-      
+
        success(res){
           console.log(res.result.stickerUrlList)
           console.log(res.result.userID)

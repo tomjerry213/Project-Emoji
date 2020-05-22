@@ -27,7 +27,7 @@
         <view class="page_title">精选表情</view>
         <view class="weui-grids">
             <view class="weui-grid" wx:for="{{recRouters}}" wx:key="name">
-                <navigator url="{{item.url+'?name='+item.name}}">
+                <navigator url="{{item.url+'?name='+item.name+'&searchFor=hot'}}">
                     <image class="grid_emoji" src="{{item.icon}}" mode="scaleToFill"/>
                     <text class="grid_label">{{item.name}}</text>
                 </navigator>
@@ -35,6 +35,7 @@
         </view>
     </view>
 
+<!-- 这东西砍不砍，好像没有用户偏好分析奥 -->
     <view class="page__hd" style="background-color:#FFE4E1;">
         <view class="page_title">为你推荐</view>
         <view class="weui-grids">

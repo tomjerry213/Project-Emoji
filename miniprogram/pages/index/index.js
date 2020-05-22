@@ -20,6 +20,8 @@ Page({
         ],
 
         // TODO: 未来将要从云存储（而不是本地）加载这些图片和类
+        //get by likes(用户偏好分析就算了吧)
+
         recRouters: [
             {
                 name: '软工作业',
@@ -126,6 +128,8 @@ Page({
             }
         })
         console.log(this.data.userInfo)
+        //after get user id, load info
+        
     },
     // not useful new 
     searchStart: function(inputVal){

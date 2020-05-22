@@ -39,14 +39,15 @@
   </picker>
 </view>
 
-<view class="section" style="background-color:#FFE4E1;">
+<!-- 我不给用户维护文件夹 -->
+<!-- <view class="section" style="background-color:#FFE4E1;">
   <view class="section__title" style="background-color:#FFE4E1;"> 选择目标文件夹</view>
   <picker bindchange="bindFolderChange" value="{{folderIndex}}" range="{{folderArray}}">
     <view class="picker" style="background-color:#FFE4E1;">
       {{folderArray[folderIndex]}}
     </view>
   </picker>
-</view>
+</view> -->
 <view class="section">
   <view class="section__title"> 请输入对表情包的描述</view>
   <view style="border: 1px solid #5c5c5c; border-radius: 10px; margin:10px; height:100px;">

@@ -16,7 +16,6 @@ Page({
                 name: '动漫',
                 url: '/pages/emg_class/emg_class',
                 icon: '/emg_type/rec_0.jpg',
-
             },
             {
                 name: '人像',

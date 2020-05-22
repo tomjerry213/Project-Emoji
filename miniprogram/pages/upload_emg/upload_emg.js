@@ -2,6 +2,7 @@
 wx.cloud.init({})
 const db = wx.cloud.database()
 const stickerCollection = db.collection("sticker")
+const userCollection = db.collection("user")
 var app = getApp()
 //from a missing utils.js
 function formatTime(date) {
@@ -201,85 +202,7 @@ Page({
           }
         })
     },
-    //对应数据库的上传操作
-    //success风格是并行的wdnmd,以下为错误示例
-    /*
-    uploadImg: function(data){
-      const db = wx.cloud.database()
-      var detailPics = this.data.detailPics;
-      var i = this.data.i
-      var tmpPath = detailPics[i]
-      var type = tmpPath.slice(tmpPath.lastIndexOf('.')+1,tmpPath.length)
-      var time = formatTime(new Date());
-      
-      stickerCollection.add({
-        data:{
-          tags:[this.data.typeArray[this.data.typeIndex],
-          this.data.styleArray[this.data.styleIndex],
-          this.data.emgDescription],//2 fixed type + all description
-          img:"",//get a ret id + type
-          type:type,
-          uploadTime:time,
-          downloadTimes:0,
-          point:0,
-          commentTimes:0,
-          author:app.globalData.userInfo._id,//find in user collention?
-        },
-        success: res=>{
-          this.setData({
-            tmpStickerId:res._id,
-            tmpType:type
-          })
-          console.log(tmpPath)
-          console.log(type)
-          console.log(time)
-        },
-        fail: err=>{
-          console.log("Err when create in sticker collection")
-        }
-      })
-      //then upload img, change path in collention
-      console.log("target cloud path:"+this.data.tmpStickerId+'.'+this.data.tmpType)
-      wx.cloud.uploadFile({
-        cloudPath: this.data.tmpStickerId+'.'+this.data.tmpType,//先上传表单生成id，再根据id命名？
-        filePath: detailPics[i], // 文件路径
-        success: res => {
-          console.log("uploadImg success")
-          // get resource ID
-          this.setData({
-            tmpCloudPath:cloudPath
-          })
-          
-          console.log(res.fileID)//貌似后续操作是根据文件id而不是url和path
-          
-        },
-        fail: err => {//remove collention
-          // handle error
-          console.log("upload File error")
-        }
-      })
-      //获取id和filepath之后再修改collection
-      stickerCollection.doc(this.data.tmpStickerId).update({
-        data:{
-          tags:[this.data.typeArray[this.data.typeIndex],
-          this.data.styleArray[this.data.styleIndex],
-          this.data.emgDescription],//2 fixed type + all description
-          img:this.data.tmpCloudPath,//get a ret id + type
-          type:type,
-          uploadTime:time,
-          downloadTimes:0,
-          point:0,
-          commentTimes:0,
-          author:app.globalData.userInfo._id,//find in user collention?
-        },
-        success: res=>{
-          console.log("change sticker collection success")
-        },
-        fail: err=>{
-          console.log("Err when change path in sticker collection")
-        }
-      })
-    }*/
+
 
     uploadImg: function(data){
       console.log(data)
@@ -319,6 +242,8 @@ Page({
             console.log(time)
 
             //then upload img, path use id in collection
+            //         userID:app.globalData.userInfo._id获取数据库中的user
+
             console.log("target cloud path:"+that.data.tmpStickerId+'.'+that.data.tmpType)
             wx.cloud.uploadFile({
               cloudPath: that.data.tmpStickerId+'.'+that.data.tmpType,//先上传表单生成id，再根据id命名？
@@ -327,11 +252,6 @@ Page({
                 //获取id和filepath之后再修改collection
                 console.log("uploadImg success")
                 console.log(res)
-                // 不知为什么在这里setData会卡住不运行，直接弃了
-                // that.setData({
-                //   tmpCloudPath:cloudPath,
-                //   tmpFileID:res.fileID
-                // })
                 console.log('get fileID'+res.fileID)//貌似后续操作是根据文件id而不是url和path
                 stickerCollection.doc(that.data.tmpStickerId).update({
                   data:{
@@ -344,11 +264,11 @@ Page({
                     downloadTimes:0,
                     point:0,
                     commentTimes:0,
-                    author:app.globalData.userInfo._id,//find in user collention?
-                  },
+                    author:app.globalData.userInfo._id,
+                  },//set sticker, then set author
                   success: (res)=>{
                     console.log("change sticker collection success")
-                    //加一个提示上传成功，然后全set空
+                    //call user? 我实在不想嵌套了
 
                   },
                   fail: (err)=>{
@@ -356,10 +276,22 @@ Page({
                   },
                   complete: () => {
                     i++;
-                    console.log("in comlpete "+ String(i))//嵌套之后不能用that了就离谱,全是0也离谱
+                    console.log("in comlpete "+ String(i))//嵌套之后不能用that了
                     if(i==detailPics.length)
                     {
                       console.log('上传图片完成')
+                      wx.showModal({
+                        title: '提示',
+                        content: '上传成功',
+                        success: function (res) {
+                          if (res.confirm) {//这里是点击了确定以后
+                            console.log('用户点击确定')
+                          }
+                          else {//这里是点击了取消以后
+                            console.log('用户点击取消')
+                          }
+                        }
+                      })
                     }
                     else{
                       data.i = i;

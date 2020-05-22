@@ -8,11 +8,8 @@ var name2url = {
   '酸了': '/emg_test/rec_4.jpg',
   '真人':'/emg_test/rec_5.jpg'
 };
-
 const db = wx.cloud.database({});
-
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -21,10 +18,11 @@ Page({
     rpp:20,
     loading:false,//开始true, load结束后改为false
     testtags:["软工作业",'程序员','在改了','就硬拖'],
-
+    searchFor:'',//决定是搜索tags的type还是style，即tags的0/1
     testUrl: '/emg_test/rec_0.jpg',
     // while linked to database ,change wxml and use here and load more
     // not used now
+    // test photos, 这些是备用的，如果load失败
     photos:[
       {
         id:1,
@@ -59,11 +57,13 @@ Page({
     })
   },
 
-// not used now, can use while using cloud database
+// not used now, 动态加载需要吗
+/*
   initData: function(f){
     var cachedPhotos = wx.getStorageSync(f);
 
-    if (!cachedPhotos) {
+    if (!cachedPhotos) 
+    {
       this.fetchData();
     } else {
       var nowTs = Date.now();
@@ -82,7 +82,8 @@ Page({
   },
 
   //add more
-  loadMore: function(e) {
+  loadMore: function(e) 
+  {
     console.log('down');
     if (this.data.hasMore) {
       this.fetchData();
@@ -92,17 +93,102 @@ Page({
   fetchData: function(e){
     
   },
+*/
+  listStickerByTypeUI() {
+    let that = this
+    wx.cloud.callFunction({
+      name: "listStickerByType",
+      data: {
+        tag: that.data.className
+      },
+      success: (res) => {
+        console.log("get sticker by type succeed", res)
+        that.image_info = res.result.data
+        that.extractInfo(that.image_info)
+      },
+      fail: (res) => {
+        console.log("get sticker by type failed", res)
+      }
+    })
+  },
+  listStickerByStyleUI() {
+    let that = this
+    wx.cloud.callFunction({
+      name: "listStickerByStyle",
+      data: {
+        tag: that.data.className
+      },
+      success: (res) => {
+        console.log("get sticker by style succeed", res)
+        that.image_info = res.result.data
+        that.extractInfo(that.image_info)
+      },
+      fail: (res) => {
+        console.log("get sticker by style failed", res)
+      }
+    })
+  },
+  listStickerByPointUI() {
+    let that=this
+    wx.cloud.callFunction({
+      name: "listStickerByPoint",
+      data: {
+        input: global_others
+      },
+      success: (res) => {
+        console.log("list Sticker By Point succeed", res)
+        that.image_info = res.result.data
+        that.extractInfo(that.image_info)
+      },
+      fail: (res) => {
+        console.log("list Sticker By Point failed", res)
+      }
+    })
+  },
+  // assist func
+  extractInfo(info) {
+    var image_URL = new Array()
+    console.log(info)
+    for (let i = 0; i < info.length; ++i) {
+      image_URL.push({
+        id:i+1,
+        url:info[i].img
+      })
+    }
+    console.log("image_URL",image_URL)
+    var that = this
+    this.setData({
+      photos: image_URL
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     var inpVal = options.name
+    var searchfor = options.searchFor
+
+    console.log(options)
     this.setData({
-      className:inpVal
+      className:inpVal,
+      searchFor:searchfor//作为要搜索的东西，是type/style
     })
     console.log(inpVal)
+    console.log(searchfor)
+    if(searchfor == 'type')//根据跳转信息
+    {
+      this.listStickerByTypeUI();
+    }
+    else if(searchfor == 'style'){
+      this.listStickerByStyleUI();
+    }
+    else{
+      this.listStickerByPointUI();
+    }
     var url = name2url[inpVal]
-
+/*
+    *一个皮
     if(url == undefined){
       this.setData({
         testUrl:'/emg_type/rec_0.jpg'
@@ -113,15 +199,11 @@ Page({
       this.setData({
         testUrl:url
       })
-    }//test url
+    }
+*/
     //load database,搜索处理和获取长度在哪啊..
-    const db = wx.cloud.database({
-    })
-    db.collection('sticker').get({
-      success: res=>{
-        console
-      }
-    })
+    //get class name
+    
 
   },
 

@@ -21,13 +21,14 @@
     </view>
 
 
-    <scroll-view class='section photos' style="height: 750px;" scroll-y="true" bindscrolltolower="loadMore" bindscrolltoupper="showFeatureOptions">
+    <!-- <scroll-view class='section photos' style="height: 750px;" scroll-y="true" bindscrolltolower="loadMore" bindscrolltoupper="showFeatureOptions"> -->
+    <scroll-view class='section photos' style="height: 750px;" scroll-y="true">
         <!-- <image class="photo" src="{{test_url}}"></image> -->
         <view class="photo-list">
             <block wx:for="{{photos}}">
                 <view class="photo-item" id="{{item.id}}" catchtap="lookPhoto">
-                    <!-- <image class="photo" src="{{item.url}}"></image> -->
-                    <image class="photo" src="{{testUrl}}"></image>
+                    <image class="photo" src="{{item.url}}"></image>
+                    <!-- <image class="photo" src="{{testUrl}}"></image> -->
                 </view>
             </block>
         </view>

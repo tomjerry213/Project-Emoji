@@ -18,7 +18,7 @@
         <view class="page_title">表情包类别</view>
         <view class="weui-grids">
             <view class="weui-grid" wx:for="{{figTypeRouters}}" wx:key="name">
-                <navigator url="{{item.url+'?name='+item.name}}">
+                <navigator url="{{item.url+'?name='+item.name+ '&searchFor=type'}}">
                     <image class="grid_emoji" src="{{item.icon}}" mode="scaleToFill"/>
                     <text class="grid_label">{{item.name}}</text>
                 </navigator>
@@ -30,7 +30,7 @@
         <view class="page_title">风格</view>
         <view class="weui-grids">
             <view class="weui-grid" wx:for="{{styleRouters}}" wx:key="name">
-                <navigator url="{{item.url+'?name='+item.name}}">
+                <navigator url="{{item.url+'?name='+item.name + '&searchFor=style'}}">
                     <image class="grid_emoji" src="{{item.icon}}" mode="scaleToFill"/>
                     <text class="grid_label">{{item.name}}</text>
                 </navigator>

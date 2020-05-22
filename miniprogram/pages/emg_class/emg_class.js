@@ -128,12 +128,14 @@ Page({
       }
     })
   },
+
+  //need change here, we need a search function!!!
   listStickerByPointUI() {
     let that=this
     wx.cloud.callFunction({
       name: "listStickerByPoint",
       data: {
-        input: global_others
+        tag: that.data.className
       },
       success: (res) => {
         console.log("list Sticker By Point succeed", res)
@@ -184,7 +186,7 @@ Page({
       this.listStickerByStyleUI();
     }
     else{
-      this.listStickerByPointUI();
+      this.listStickerByTypeUI();
     }
     var url = name2url[inpVal]
 /*

@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "表情街",
-  "usingComponents": {}
+  "usingComponents": {
+    "mp-icon": "/weui-miniprogram/icon/icon"
+  }
 }

@@ -29,7 +29,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var inpID = options.imgID   // TODO: 应该作为参数从emg_class页面传入
+    var inpID = options.imgID
     var inpVal = options.ImgUrl
     var inpAuthor = options.author
     var inpTag = JSON.parse(options.tags) 
@@ -42,6 +42,7 @@ Page({
     var inpBoolLike = getApp().globalData.userInfo.likeList.includes(inpID)
     var inpBoolStar = getApp().globalData.userInfo.starList.includes(inpID)
     
+    console.log(getApp().globalData.userInfo.likeList)
     console.log(inpVal)
     console.log('inpBoolLike:', inpBoolLike)
     console.log('inpBoolStar:', inpBoolStar)
@@ -60,11 +61,13 @@ Page({
 
   changeLikeStatus: function(){
     if (this.data.boolLike){  // 如果用户已经点赞过这个表情包了
-      this.setData({ boolLike: false, numLike: this.data.numLike-1 })
+      this.setData({ boolLike: false, numLike: this.data.numLike - 1 })
 
       // 从App()中缓存的用户信息likeList中删除本表情包
       var idxToRemove = getApp().globalData.userInfo.likeList.indexOf(this.data.imgID)
       if (idxToRemove != 1) getApp().globalData.userInfo.likeList.splice(idxToRemove, 1)
+
+      console.log(getApp().globalData.userInfo.likeList)
 
       // 调用云函数，修改数据库中user集合和sticker集合的信息
       wx.cloud.callFunction({
@@ -73,7 +76,7 @@ Page({
       })
     }
     else{   // 如果用户还没点赞过这个表情包
-      this.setData({ boolLike: true, numLike: this.data.numLike+1 })
+      this.setData({ boolLike: true, numLike: Number(this.data.numLike - 1 + 2) })
 
       // 从App()中缓存的用户信息likeList中加入本表情包
       var idxToAdd = getApp().globalData.userInfo.likeList.indexOf(this.data.imgID)
@@ -89,8 +92,8 @@ Page({
 
   changeStarStatus: function(){     // 处理逻辑和上面的changeLikeStatus一样
     if (this.data.boolStar)
-    {  // 如果用户已经点赞过这个表情包了
-      this.setData({ boolStar: false, numStar: this.data.numStar-1 })
+    {  // 如果用户已经收藏过这个表情包了
+      this.setData({ boolStar: false, numStar: this.data.numStar - 1 })
 
       // 从App()中缓存的用户信息starList中删除本表情包
       var idxToRemove = getApp().globalData.userInfo.starList.indexOf(this.data.imgID)
@@ -102,8 +105,8 @@ Page({
         data: { imgID: this.data.imgID, method: 'removeStar' }
       })
     }
-    else{   // 如果用户还没点赞过这个表情包
-      this.setData({ boolStar: true, numStar: this.data.numStar+1 })
+    else{   // 如果用户还没收藏过这个表情包
+      this.setData({ boolStar: true, numStar: Number(this.data.numStar - 1 + 2) })
 
       // 从App()中缓存的用户信息starList中加入本表情包
       var idxToAdd = getApp().globalData.userInfo.starList.indexOf(this.data.imgID)

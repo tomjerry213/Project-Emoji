@@ -6,8 +6,11 @@
 </view>
 
 <view class="search" bindtap="search">
-    <!-- <icon class="searchicon" size='14' type='search'></icon> -->
-    <input class="search_input" disabled placeholder="🔍点击搜索表情包OvO"/>
+    <view class="search_input">
+        <mp-icon type="field" icon="search" color="purple" size="{{25}}"></mp-icon>
+        <text style="color: #ccc; font-size: 14px; float: right; margin-right: 20%; margin-top: 1%;">点击搜索表情包OvO</text>
+    </view>
+    <!--<input class="search_input" disabled placeholder="🔍点击搜索表情包OvO"/>-->
     <!-- <view class="search_button" bindtap="search">搜表情</view> -->
 </view>
 
@@ -36,6 +39,7 @@
     </view>
 
 <!-- 这东西砍不砍，好像没有用户偏好分析奥 -->
+<!--先砍了
     <view class="page__hd" style="background-color:#FFE4E1;">
         <view class="page_title">为你推荐</view>
         <view class="weui-grids">
@@ -46,7 +50,7 @@
                 </navigator>
             </view>
         </view>
-    </view>
+    </view>-->
 
     <!--
         TODO: 等有素材之后，这里可以加上一些专题表情。比如熊猫头专题、柴犬专题等。

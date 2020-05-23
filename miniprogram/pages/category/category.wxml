@@ -7,8 +7,11 @@
 </view>
 
 <view class="search" bindtap="search">
-    <!-- <icon class="searchicon" size='14' type='search'></icon> -->
-    <input class="search_input" disabled placeholder="🔍点击搜索表情包OvO"/>
+    <view class="search_input">
+        <mp-icon type="field" icon="search" color="purple" size="{{25}}"></mp-icon>
+        <text style="color: #ccc; font-size: 14px; float: right; margin-right: 20%; margin-top: 1%;">点击搜索表情包OvO</text>
+    </view>
+    <!--<input class="search_input" disabled placeholder="🔍点击搜索表情包OvO"/>-->
     <!-- <view class="search_button" bindtap="search">搜表情</view> -->
 </view>
 

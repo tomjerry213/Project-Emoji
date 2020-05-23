@@ -12,7 +12,7 @@
 .weui-icon-search_in-box {
   position: absolute;
   left: 10px;
-  top: 7px;
+  top: 12px;
 }
 .weui-search-bar__form {
   position: relative;
@@ -36,7 +36,7 @@
   line-height: 28px;
   font-size: 14px;
 }
-.weui-search-bar__cancel-btn {
+.cancel-btn {
   margin-left: 10px;
   line-height: 28px;
   color: #09BB07;

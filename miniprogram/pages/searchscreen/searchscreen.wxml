@@ -5,12 +5,12 @@
             <view class="weui-search-bar__form">
             <!-- 搜索框 -->
                 <view class="weui-search-bar__box">
-                    <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                    <icon class="weui-icon-search_in-box" type="search" size="20"></icon>
                     <input type="text" class="weui-search-bar__input" value="{{inputVal}}" bindconfirm="searchStart" placeholder="请输入搜索内容"/>
                 </view>
             </view>
             <!-- 取消搜索, 突然不能用了？？ -->
-            <view class="weui-search-bar__cancel-btn" bindtap='hideInput'>取消</view>
+            <view class="cancel-btn" bindtap='hideInput'>取消</view>
         </view>
     </view>
 </view>

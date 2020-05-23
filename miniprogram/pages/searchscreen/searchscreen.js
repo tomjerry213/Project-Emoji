@@ -5,12 +5,12 @@ Page({
 
     // 取消搜索,返回主页面
     hideInput: function () {
-        //出了奇怪的bug，会出现log但是不会跳转
-        console.log("backing")
-        wx.navigateTo({
-        //跳转，返回主页面路径
+        //直接改用navigateBack
+        wx.navigateBack()
+        /*wx.redirectTo({
+        跳转，返回主页面路径
             url: '../index/index',
-        })
+        })*/
     },
     //按下回车键之后开始搜索
     searchStart: function(inputVal){

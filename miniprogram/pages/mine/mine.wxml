@@ -2,7 +2,7 @@
 
 <view class="page">
 
-    <view class='avatar_background' style="background-color:#FFFACD;">
+    <view class='avatar_background' style="background-color:#FAFAD2;">
         <view id="avatar_view">
             <open-data type="userAvatarUrl" id="avatar" ></open-data>
         </view>

@@ -91,7 +91,6 @@ Page({
   onLoad: function (options) {
     console.log("user id in database:")
     console.log(app.globalData.userInfo._id)
-
   },
 
   /**

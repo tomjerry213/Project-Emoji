@@ -1,4 +1,7 @@
 {
   "navigationBarTitleText": "表情街",
-  "usingComponents": {}
+  "usingComponents": {
+    "mp-cell": "/weui-miniprogram/cell/cell",
+    "mp-uploader": "/weui-miniprogram/uploader/uploader"
+  }
 }

@@ -17,7 +17,7 @@
 
 <view class="page">
 
-    <view class="page__hd">
+    <view class="page__hd" style="background-color:#87CEFA;">
         <view class="page_title">表情包类别</view>
         <view class="weui-grids">
             <view class="weui-grid" wx:for="{{figTypeRouters}}" wx:key="name">
@@ -29,7 +29,7 @@
         </view>
     </view>
 
-    <view class="page__hd">
+    <view class="page__hd" style="background-color:#FAFAD2;">
         <view class="page_title">风格</view>
         <view class="weui-grids">
             <view class="weui-grid" wx:for="{{styleRouters}}" wx:key="name">

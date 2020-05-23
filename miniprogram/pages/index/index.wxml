@@ -16,7 +16,7 @@
 
 <view class="page">
     
-    <view class="page__hd">
+    <view class="page__hd" style="background-color:#87CEFA;">
         <view class="page_title">热门搜索</view>
         <view class="weui-grids">
             <!-- just for show here -->
@@ -26,7 +26,7 @@
         </view>
     </view>
 
-    <view class="page__hd" style="background-color:#FFFACD;">
+    <view class="page__hd" style="background-color:#FAFAD2;">
         <view class="page_title">精选表情</view>
         <view class="weui-grids">
             <view class="weui-grid" wx:for="{{recRouters}}" wx:key="name">

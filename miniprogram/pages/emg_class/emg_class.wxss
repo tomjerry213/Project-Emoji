@@ -80,6 +80,7 @@ image.poster{
   vertical-align: middle; */
 }
 .load-content{
+  font-weight: bolder;
   text-align: center;
-  color: blueviolet;
+  color:black;
 }

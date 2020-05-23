@@ -23,6 +23,8 @@
         <!-- <view class="search_button" bindtap="search">搜表情</view> -->
     </view>
 
+    <!--想加个“加载中”显示，但是遇到一点点问题（weui缺少功能），可能需要换一种方式使用weui组件，而且也没找到好方法来让加载中保持一段时间-->
+    <!--<mp-loading type="circle" style="position=absolute;left=500px;"></mp-loading> -->
 
     <!-- <scroll-view class='section photos' style="height: 750px;" scroll-y="true" bindscrolltolower="loadMore" bindscrolltoupper="showFeatureOptions"> -->
     <scroll-view class='section photos' style="height: 750px;" scroll-y="true">

@@ -13,7 +13,7 @@ Page({
   data: {
     className:"xxx",//get name onload, search in db
     rpp:20,
-    loading:false,//开始true, load结束后改为false
+    loading:true,//开始true, load结束后改为false
     testtags:["软工作业",'程序员','在改了','就硬拖'],
     searchFor:'',//决定是搜索tags的type还是style，即tags的0/1
     testUrl: '/emg_test/rec_0.jpg',
@@ -195,6 +195,9 @@ Page({
       this.listStickerByTypeUI();
     }
     var url = name2url[inpVal]
+     this.setData({
+      loading: false
+    })
 /*
     *一个皮
     if(url == undefined){

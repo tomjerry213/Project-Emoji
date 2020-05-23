@@ -50,5 +50,8 @@
     ],
     "color": "#000000",
     "selectedColor": "#1111ff"
+  },
+  "useExtendedLib": {
+    "weui": true
   }
 }

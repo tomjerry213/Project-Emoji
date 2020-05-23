@@ -7,8 +7,8 @@
 
 <view class="search" bindtap="search">
     <!-- <icon class="searchicon" size='14' type='search'></icon> -->
-    <input class="search_input" disabled placeholder="🔍点击搜索表情包OvO" bindtap='search'/>
-    <view class="search_button" bindtap="search">搜表情</view>
+    <input class="search_input" disabled placeholder="🔍点击搜索表情包OvO"/>
+    <!-- <view class="search_button" bindtap="search">搜表情</view> -->
 </view>
 
 <view class="page">

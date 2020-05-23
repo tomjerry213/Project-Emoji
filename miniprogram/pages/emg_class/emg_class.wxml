@@ -16,8 +16,8 @@
 
     <view class="search" bindtap="search">
         <!-- <icon class="searchicon" size='14' type='search'></icon> -->
-        <input class="search_input" disabled placeholder="🔍换个关键词试试吧=v=" bindtap='search'/>
-        <view class="search_button" bindtap="search">搜表情</view>
+        <input class="search_input" disabled placeholder="🔍换个关键词试试吧=v="/>
+        <!--<view class="search_button" bindtap="search">搜表情</view>-->
     </view>
 
 
@@ -39,7 +39,7 @@
                 <text class="weui-loading"/><text class="load-content">Loading...</text>
             </block>
             <block wx:else>
-                <view class="load-content"><text>No more... Orz</text></view>
+                <view class="load-content"><text>找不到更多了QAQ</text></view>
             </block>
         </view>
     </scroll-view>

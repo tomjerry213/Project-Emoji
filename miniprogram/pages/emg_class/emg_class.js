@@ -18,7 +18,7 @@ Page({
     searchFor:'',//决定是搜索tags的type还是style，即tags的0/1
     testUrl: '/emg_test/rec_0.jpg',
     // test photos, 这些是备用的，如果load失败
-    photos:[
+    /*photos:[
       {
         id:1,
         url:'/emg_type/rec_0.jpg',
@@ -35,7 +35,9 @@ Page({
         id:4,
         url:'/emg_type/rec_3.jpg',
       },
-    ],
+    ],*/
+    //放弃备用图片，因为会导致用户在加载完成前看到它们
+  photos:[],
     featureOptionHidden: true,
     hasMore: false,
   },

@@ -191,6 +191,8 @@ Page({
           content: '确定要放弃上传此图片吗？',
           success: function(res) {
             if (res.confirm) {
+              //大哥，谁把我这个之前的给删了？不看就别瞎碰行吧
+              images.splice(index,1);
               console.log("delete img")
             } 
             else if (res.cancel) {
@@ -203,8 +205,24 @@ Page({
         })
     },
 
+    showBusy: function () 
+    {    
+      wx.showToast({
+      title: '上传中...',      
+      mask: true,       
+      icon: 'loading'    
+    })  
+  },  
+  showSuccess: function () 
+  {  
+    wx.showToast({      
+    title: '上传成功',
+    mask: true,       
+    icon: 'success'})
+  },
 
     uploadImg: function(data){
+      
       console.log(data)
       var i = data.i?data.i:0;
       // success = data.success ? data.success : 0,
@@ -218,6 +236,7 @@ Page({
         var type = tmpPath.slice(tmpPath.lastIndexOf('.')+1,tmpPath.length)
         var time = formatTime(new Date());
         var that = this
+        that.showBusy()
         stickerCollection.add({
           data:{
             tags:[this.data.typeArray[this.data.typeIndex],
@@ -230,6 +249,7 @@ Page({
             point:0,
             commentTimes:0,
             likeTimes:0,
+            starTimes:0,
             author:app.globalData.userInfo._id,//find in user collention?
           },
           success: (res)=>{
@@ -280,18 +300,37 @@ Page({
                     if(i==detailPics.length)
                     {
                       console.log('上传图片完成')
-                      wx.showModal({
-                        title: '提示',
-                        content: '上传成功',
-                        success: function (res) {
-                          if (res.confirm) {//这里是点击了确定以后
-                            console.log('用户点击确定')
-                          }
-                          else {//这里是点击了取消以后
-                            console.log('用户点击取消')
-                          }
-                        }
-                      })
+                      that.showSuccess()
+                      that.setData({
+                            detailPics:[],
+                            i:0,
+                            success:0,
+                            fail:0,
+                            currentLen:0,
+                            maxDesLen:30,
+                            emgDescription:""
+                          })
+                      // wx.showModal({
+                      //   title: '提示',
+                      //   content: '上传成功',
+                      //   success: function (res) {
+                      //     if (res.confirm) {//这里是点击了确定以后
+                      //       console.log('用户点击确定')
+                      //     }
+                      //     else {//这里是点击了取消以后
+                      //       console.log('用户点击取消')
+                      //     }
+                      //     that.setData({
+                      //       detailPics:[],
+                      //       i:0,
+                      //       success:0,
+                      //       fail:0,
+                      //       currentLen:0,
+                      //       maxDesLen:30,
+                      //       emgDescription:""
+                      //     })
+                      //   }
+                      // })
                     }
                     else{
                       data.i = i;

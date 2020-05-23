@@ -7,8 +7,8 @@
         
     </view>
     <view class="weui-grids">
-        <view class="weui-grid" wx:for="{{figTypeRouters}}" wx:key="name">
-            <image class="grid_emoji" src="{{item.icon}}" mode="scaleToFill" bindtap="jumpDisplay" data-item="{{item}}"/>
+        <view class="weui-grid" wx:for="{{imageUrl}}" wx:key="name">
+            <image class="grid_emoji" src="{{item.img}}" mode="scaleToFill" bindtap="jumpDisplay" data-item="{{item}}"/>
         </view>
     </view>
 </view>

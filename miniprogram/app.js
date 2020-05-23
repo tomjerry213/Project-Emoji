@@ -1,5 +1,10 @@
 //app.js
 App({
+
+    globalData:{
+        userInfo: null
+    },
+
     onLaunch: async function () {
         var that = this;
         
@@ -15,7 +20,6 @@ App({
                 traceUser: true,
             })
         }
-        this.globalData = {}
         
         // 从云端获取用户的权限信息，存储在App.globalData.userInfo中
         wx.cloud.callFunction({

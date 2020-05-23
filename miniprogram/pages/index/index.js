@@ -110,8 +110,8 @@ Page({
             })
             return
         }
-
         // 获取用户信息，为调用云开发时自动创建的，留着后面用
+        console.log("index load")
         wx.getSetting({
             success: res => {
                 if (res.authSetting['scope.userInfo']) {
@@ -121,14 +121,20 @@ Page({
                             this.setData({
                                 avatarUrl: res.userInfo.avatarUrl,
                                 userInfo: res.userInfo
-                            })
+                            }),
+                            console.log(res.userInfo)
+                        },
+                        fail: res=>{
+                            console.log('failed get info',res)
                         }
                     })
                 }
+            },
+            fail: res=>{
+                console.log('failed ',res)
             }
         })
         console.log(this.data.userInfo)
-        //after get user id, load info
         
     },
     // not useful new 
@@ -138,6 +144,4 @@ Page({
             url:'../searchres/searchres?inputVal='+JSON.stringify(inputVal),
         })
     }
-
-
 })

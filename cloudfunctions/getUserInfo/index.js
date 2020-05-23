@@ -7,12 +7,16 @@ exports.main = async (event, context) => {
     const wxContext = cloud.getWXContext();
     const db = cloud.database();
     var openid = wxContext.OPENID;
-
+    console.log(wxContext)
     // 根据openid查询user集合中的记录。
     var result = await db.collection('user').where({openid: openid}).get();
-    if (result.data.length != 0) result = result.data[0];
-
+    if (result.data.length != 0) 
+    {
+        console.log('uesr already in database')
+        result = result.data[0];
+    }
     // 如果目前user集合中还没有和当前用户的openid有关的记录，则添加一条新的。
+    // 为什么我清空了数据库但是没有运行新建用户呢？？？
     else {
         console.log("adding new userInfo into database.");
         var new_id = await db.collection('user').add({

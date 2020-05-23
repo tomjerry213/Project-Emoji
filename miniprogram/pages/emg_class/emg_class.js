@@ -10,9 +10,6 @@ var name2url = {
 };
 const db = wx.cloud.database({});
 Page({
-  /**
-   * 页面的初始数据
-   */
   data: {
     className:"xxx",//get name onload, search in db
     rpp:20,
@@ -20,8 +17,6 @@ Page({
     testtags:["软工作业",'程序员','在改了','就硬拖'],
     searchFor:'',//决定是搜索tags的type还是style，即tags的0/1
     testUrl: '/emg_test/rec_0.jpg',
-    // while linked to database ,change wxml and use here and load more
-    // not used now
     // test photos, 这些是备用的，如果load失败
     photos:[
       {
@@ -41,7 +36,6 @@ Page({
         url:'/emg_type/rec_3.jpg',
       },
     ],
-    
     featureOptionHidden: true,
     hasMore: false,
   },
@@ -49,8 +43,14 @@ Page({
   // just for test
   lookPhoto: function(event) {
     var that = this;
-    var id = (event.currentTarget.id);
-    var url = '../emg_display/emg_display?ImgUrl=' + this.data.testUrl+'&tags='+JSON.stringify(this.data.testtags)+'&numLike=0&numStar=0&author=匿名';
+    var id = (event.currentTarget.id)-1;
+    // var url = '../emg_display/emg_display?ImgUrl=' + this.data.testUrl+'&tags='+JSON.stringify(this.data.testtags)+'&numLike=0&numStar=0&author=匿名';
+    var url = '../emg_display/emg_display?ImgUrl=' + this.data.photos[id].url+
+    '&tags='+JSON.stringify(this.data.photos[id].tags)+
+    '&numLike=' + this.data.photos[id].likeTimes+
+    '&numStar=' + this.data.photos[id].starTimes+
+    '&author=' + this.data.photos[id].author+
+    '&imgID=' + this.data.photos[id]._id;//this is id not name！！
     console.log(url)
     wx.navigateTo({
       url: url
@@ -154,6 +154,10 @@ Page({
     for (let i = 0; i < info.length; ++i) {
       image_URL.push({
         id:i+1,
+        _id: info[i]._id,//bqb的_id
+        tags : info[i].tags,
+        likeTimes:info[i].likeTimes,
+        starTimes: info[i].starTimes,
         url:info[i].img
       })
     }

@@ -4,6 +4,7 @@ Page({
   /**
    * 页面的初始数据
    * 单个表情包的各种数据，后续与后端可以再加
+   * 用户打开即显示like/star数目，在界面退出的时候再更新数字
    */
   data: {
     /** get Image url from other pages like emg_class
@@ -28,12 +29,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var inpID = "a9bfcffc5ebfcf8300b1633c474830cb"   // TODO: 应该作为参数从emg_class页面传入
+    var inpID = options.imgID   // TODO: 应该作为参数从emg_class页面传入
     var inpVal = options.ImgUrl
     var inpAuthor = options.author
-    var inpTag = JSON.parse(options.tags)
-    var inpLike = JSON.parse(options.numLike)
-    var inpStar = JSON.parse(options.numStar)
+    var inpTag = JSON.parse(options.tags) 
+    var inpLike = options.numLike
+    var inpStar = options.numStar
     // var inpBoolLike = JSON.parse(options.boolLike)
     // var inpBoolCollect = JSON.parse(options.boolCollect)
 
@@ -87,7 +88,8 @@ Page({
   },
 
   changeStarStatus: function(){     // 处理逻辑和上面的changeLikeStatus一样
-    if (this.data.boolStar){  // 如果用户已经点赞过这个表情包了
+    if (this.data.boolStar)
+    {  // 如果用户已经点赞过这个表情包了
       this.setData({ boolStar: false, numStar: this.data.numStar-1 })
 
       // 从App()中缓存的用户信息starList中删除本表情包
@@ -114,7 +116,15 @@ Page({
       })
     }
   },
-
+  //图片preview/下载
+  showPhotoInfo: function(e)
+  {
+      var current = e.target.dataset.src
+      wx.previewImage({
+        current: current,
+        urls: [this.data.ImgUrl]
+      })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -138,9 +148,22 @@ Page({
 
   /**
    * 生命周期函数--监听页面卸载
+   * we need a reset! 
    */
   onUnload: function () {
-
+    // var that = this
+    // that.setData({
+    //   ImgUrl: '',
+    //   imgID: '',
+    //   author: '匿名',
+    //   tags: ["软工作业", "程序员", "在改了", "就硬拖"],
+    //   type: '',
+    //   style: '',
+    //   numLike: 0,
+    //   numStar: 0,
+    //   boolLike: false,
+    //   boolStar: false
+    // })
   },
 
   /**

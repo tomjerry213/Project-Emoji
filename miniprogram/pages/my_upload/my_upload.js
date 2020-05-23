@@ -64,7 +64,6 @@ Page({
 
        success(res){
           console.log(res.result.stickerUrlList)
-          console.log(res.result.userID)
           const data =res.result.stickerUrlList.data
           //console.log(data)
           const temp = new Array()

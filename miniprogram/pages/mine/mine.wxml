@@ -4,7 +4,7 @@
 
     <view class='avatar_background' style="background-color:#FFFACD;">
         <view id="avatar_view">
-            <open-data type="userAvatarUrl" id="avatar"></open-data>
+            <open-data type="userAvatarUrl" id="avatar" ></open-data>
         </view>
         <open-data type="userNickName" id="nickname"></open-data>
     </view>

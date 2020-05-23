@@ -127,7 +127,6 @@
 }
 .section{
   background-size: cover;
-  margin-top: 20rpx;
   background-color: white;
   font-size: 40rpx;
   color: #007aff;

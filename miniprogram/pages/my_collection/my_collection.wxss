@@ -22,66 +22,18 @@ image.poster{
     display: block;
 }
 
-/*searchbar*/
-.search{
-    width: 90%;
-    transform: translate(0, -50%);
-    margin: 0 auto;
-    padding: 0px;
-    height: 2rem;
-    text-align: center;
-}
-
-.search_input {
-    width: 80%; height: fill;
-    position: relative;
-    padding: 3px;
-    margin: 0px;
-    display: inline-block;
-    border: 1px gray solid;
-    border-right: none;
-    border-radius: 10px 0px 0px 10px;
-    font-size: 14px;
-    vertical-align: middle;
-    box-shadow: 0px 0px 5px #888888;
-    background-color: white;
-
-}
-
-.search_button{
-    background-color: palevioletred;
-    border: 1px gray solid;
-    border-left: none;
-    position: relative;
-    height: fill;
-    align-items: center;
-    flex-direction: row;
-    color: white;
-    display: inline-block;
-    font-weight: bolder;
-    border-radius: 0px 10px 10px 0px;
-    padding: auto;
-    text-align: center;
-    margin: 0px;
-    padding: 3px;
-    font-size: 14px;
-    position: relative;
-    vertical-align: middle;
-    box-shadow: 0px 0px 5px #888888;
-}
-
 view.page_title{
-    margin: 5px 0px;
+    margin: 5px 0px 10px 5px;
     padding-left: 10px;
     padding-top: 10px;
     text-align: left;
+    font-size: 20px;
 }
 
 
 .page__hd{
     text-align: center;
     font-weight: bold;
-    border-bottom: 1rem lightgray solid;
 }
 
 .weui-grids {

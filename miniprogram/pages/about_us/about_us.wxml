@@ -4,12 +4,10 @@
     <image class="poster" src="/images/poster.jpg" mode="scaleToFill"/>
 </view>
 
-<view class="page">
-
+<view class="page" style="background-color:#FAFAD2;">
     <view class="page__hd">
-        <view class="page_title">关于我们</view>
-        
+        <view class="page_title" style="background-color:#87CEFA;">关于我们</view>
     </view>
-    <text>我们是不知名的软工小组\n</text>
-    <text>来观摩我们的项目！\nhttps://github.com/tomjerry213/Project-Emoji</text>
+    <view style="padding-left: 10px;">我们是不知名的软工小组\n</view>
+    <view style="padding-left: 10px; padding-bottom: 15px;">来观摩我们的项目！\nhttps://github.com/tomjerry213/Project-Emoji</view>
 </view>

@@ -19,15 +19,15 @@
 </view>
 
 <view class="section" style="background-color:#FFFACD;">
-  <view class="section__title" style="background-color:#FFFACD;"> 选择表情包类别</view>
+  <view class="section__title" style="background-color:#FFFACD;">选择表情包类别</view>
   <picker bindchange="bindTypeChange" value="{{typeIndex}}" range="{{typeArray}}">
-    <view class="picker" style="background-color:#FFFACD;">
+    <view class="picker" style="background-color:#FFFACD;margin-bottom:10px;">
       {{typeArray[typeIndex]}}
     </view>
   </picker>
 </view>
 <view class="section" style="background-color:#7FFFAA;">
-  <view class="section__title" style="background-color:#7FFFAA;"> 选择表情包风格</view>
+  <view class="section__title" style="background-color:#7FFFAA;">选择表情包风格</view>
   <picker bindchange="bindStyleChange" value="{{styleIndex}}" range="{{styleArray}}">
     <view class="picker" style="background-color:#7FFFAA;margin-bottom:10px;">
        {{styleArray[styleIndex]}}

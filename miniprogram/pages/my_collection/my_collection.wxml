@@ -2,13 +2,12 @@
 
 <view class="page">
 
-    <view class="page__hd">
-        <view class="page_title">我收藏的表情包</view>
-        
-    </view>
-    <view class="weui-grids">
-        <view class="weui-grid" wx:for="{{imageUrl}}" wx:key="name">
-            <image class="grid_emoji" src="{{item.img}}" mode="scaleToFill" bindtap="jumpDisplay" data-item="{{item}}"/>
+    <view class="page__hd" style="background-color:#FAFAD2;">
+        <view class="page_title" style="background-color:#FAFAD2;">我收藏的表情包</view>
+        <view class="weui-grids" style="background-color:#87CEFA;">
+            <view class="weui-grid" wx:for="{{imageUrl}}" wx:key="name">
+                <image class="grid_emoji" src="{{item.img}}" mode="scaleToFill" bindtap="jumpDisplay" data-item="{{item}}"/>
+            </view>
         </view>
     </view>
 </view>

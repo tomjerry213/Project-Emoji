@@ -3,6 +3,7 @@ const app = getApp()
 //TODO: update rec_rputers use algorithm instead of fixed
 Page({
     data: {
+        imageUrl:[],
         avatarUrl: './user-unlogin.png',
         userInfo: {},
         logged: false,
@@ -87,7 +88,33 @@ Page({
     },
 
     onLoad: function() {
-
+        var that = this;
+        var id = app.globalData.userInfo._id;
+        var likeList = app.globalData.userInfo.likeList;
+        console.log(likeList);
+        wx.cloud.callFunction(
+        {
+            name:"getLikeList",
+            data:{
+                likeList:likeList
+            },
+            success(res)
+            {
+                console.log(res);
+                let data = res.result.response;
+                var result = new Array();
+                for(let i = 0;i<data.length;i++)
+                {   
+                    result.push({"img":data[i].img,"likeTimes":data[i].likeTimes,"tag":data[i].tags});
+                }
+                that.setData({imageUrl:result});
+                console.log(that.data.imageUrl);
+            },
+            fail(res)
+            {
+                console.error;
+            }
+        })
     },
 
 })

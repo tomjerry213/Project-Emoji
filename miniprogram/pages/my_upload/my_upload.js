@@ -53,6 +53,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
    onLoad: function (options) {
+    
      const app = getApp()
      console.log(app.globalData.userInfo._id)
      var that = this
@@ -76,9 +77,30 @@ Page({
        fail(res){
          console.log(res)
        },
-     })
+     })  
   },
 
+  /**
+   *  删除已上传的图片的函数
+   */
+  delteSticker:function()
+  {
+    console.log
+    wx.cloud.callFunction({
+      name:"deleteSticker",
+      data:{
+        fileId:"54bac78c5eccee21004e46f41d59e532"
+      },
+      success(res)
+      {
+        console.log(res);
+      },
+      fail(res)
+      {
+        console.error(res);
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

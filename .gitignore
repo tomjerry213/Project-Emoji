@@ -1,5 +1,5 @@
 # dependencies npm包文件
-/node_modules
+node_modules
 
 # 配置文件
 /package-lock.json

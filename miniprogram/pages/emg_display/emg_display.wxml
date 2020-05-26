@@ -41,6 +41,10 @@
         <text> {{numStar}}</text>
     </view>
 
+    <view class="cells" bindtap="getAuthorOtherImgs">
+        <image class="icon" src="/icons/others.jpg"/>
+        <text> 看看TA的其他作品</text>
+    </view>
   </view>
 
 

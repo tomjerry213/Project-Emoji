@@ -36,14 +36,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
    onLoad: function (options) {
-    
-     const app = getApp()
-     console.log(app.globalData.userInfo._id)
+    var targetAuthor = options.targetAuthor
      var that = this
      wx.cloud.callFunction({
        name:"getStickerOfUser",
        data:{
-         userID:app.globalData.userInfo._id
+         userID:targetAuthor
        },
 
        success(res){

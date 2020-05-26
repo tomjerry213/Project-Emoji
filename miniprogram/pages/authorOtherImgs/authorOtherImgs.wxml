@@ -1,8 +1,8 @@
-<!--miniprogram/pages/my_upload/my_upload.wxml-->
+<!--miniprogram/pages/authorOtherImgs/authorOtherImgs.wxml-->
 
 <view class="page">
     <view class="page__hd" style="background-color:#FAFAD2;">
-        <view class="page_title" style="background-color:#FAFAD2;">我上传的表情包</view>
+        <view class="page_title" style="background-color:#FAFAD2;">作者的表情包</view>
         <view class="weui-grids" style="background-color:#87CEFA;">
             <view class="weui-grid" wx:for="{{imageUrl}}">
                 <image class="grid_emoji" src="{{item.img}}" mode="scaleToFill" bindtap="jumpDisplay" data-item="{{item}}"/>

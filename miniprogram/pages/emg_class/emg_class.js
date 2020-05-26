@@ -156,6 +156,7 @@ Page({
     for (let i = 0; i < info.length; ++i) {
       image_URL.push({
         id:i+1,
+        author:info[i].author,
         _id: info[i]._id,//bqb的_id
         tags : info[i].tags,
         likeTimes:info[i].likeTimes,
@@ -198,22 +199,6 @@ Page({
      this.setData({
       loading: false
     })
-/*
-    *一个皮
-    if(url == undefined){
-      this.setData({
-        testUrl:'/emg_type/rec_0.jpg'
-      })
-    }
-    else{
-      console.log(url)
-      this.setData({
-        testUrl:url
-      })
-    }
-*/
-    //load database,搜索处理和获取长度在哪啊..
-    //get class name
     
 
   },

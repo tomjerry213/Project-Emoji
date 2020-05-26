@@ -1,0 +1,70 @@
+/* miniprogram/pages/my_upload/my_upload.wxss */
+
+@import '/style/weui.wxss';
+
+page{
+    background: #f6f6f6;/*f6f6f6*/
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/*poster*/
+view.header{
+    width: 100%;
+    height: 10rem;
+    display: block;
+    position: relative;
+}
+
+image.poster{
+    width: 100%;
+    top: 0px; height: 100%;
+    display: block;
+}
+
+view.page_title{
+    margin: 5px 0px 10px 5px;
+    padding-left: 10px;
+    padding-top: 10px;
+    text-align: left;
+    font-size: 20px;
+}
+
+.page__hd{
+    text-align: center;
+    font-weight: bold;
+}
+
+.weui-grids {
+    position: relative;
+    overflow: hidden;
+}
+
+.weui-grid {
+    padding: 5px;
+    width: 25%;
+    display: inline-block;
+}
+
+/*按下之后的响应*/
+.weui-grid:active {
+    background-color: #ECECEC;
+}
+
+
+image.grid_emoji{
+    display: inline-block;
+    width: 100%;
+    height: 25vw;
+    margin: 2px;
+}
+
+text.grid_label{
+    display: inline-block;
+    font-size: 12px;
+    text-align: center;
+    margin: 2px;
+    padding: 0px;
+    color: #888888;
+}

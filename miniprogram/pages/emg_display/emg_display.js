@@ -46,7 +46,7 @@ Page({
     console.log(inpVal)
     console.log('inpBoolLike:', inpBoolLike)
     console.log('inpBoolStar:', inpBoolStar)
-    
+    console.log(inpAuthor)
     this.setData({
       imgID: inpID,
       ImgUrl: inpVal,
@@ -127,6 +127,14 @@ Page({
         current: current,
         urls: [this.data.ImgUrl]
       })
+  },
+
+
+  getAuthorOtherImgs: function(){
+    var that = this
+    wx.navigateTo({
+      url: '../authorOtherImgs/authorOtherImgs?targetAuthor=' + that.data.author,
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

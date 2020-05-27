@@ -1,5 +1,5 @@
 {
-  "name": "uploadImg",
+  "name": "uploadSticker",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "wx-server-sdk": "latest"
+    "nodejieba": "^2.4.1",
+    "wx-server-sdk": "^2.0.3"
   }
 }

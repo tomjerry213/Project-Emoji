@@ -1,32 +1,36 @@
 /* 上传表情包云函数
  * 作者：wyq
  * 时间：2020.5.27
+ * lsl changed in 6.1
  */
 
 const cloud = require('wx-server-sdk');
-const nodejieba = require('nodejieba');
-nodejieba.load();       // 加载jieba分词模型
+// const nodejieba = require('nodejieba');
+// nodejieba.load();       // 加载jieba分词模型
 
 cloud.init();
 const db = cloud.database();
 const _ = db.command;
-
+var uploadTime = ''
 // 云函数入口函数
 exports.main = async (event, context) => {
+//test 是不是成功
+    // return event
     const wxContext = cloud.getWXContext();
     const images = event.images;        // base64编码后的表情包文件
     const paths = event.paths;          // 表情包在本地的路径，用于解析type信息
     const tag = event.tag;
     const style = event.style;
     const description = event.description;  // 表情包类别、风格、用户描述
-
+    uploadTime = event.uploadTime
     const openid = wxContext.OPENID;
-    const time = formatTime(new Date());
+    // const time = formatTime(new Date());
 
     // 遍历每个表情包，执行上传函数，并记录每个表情包在数据库中的_id返回。
     stickerIDs = []
     for (idx in images){
-        let stickerID = upload(images[idx], paths[idx], tag, style, description, openid);
+        let stickerID = await upload(images[idx], paths[idx], tag, style, description, openid);//返回的是一个promise对象
+        console.log("stID is",stickerID)//这是个promise对象？
         stickerIDs.push(stickerID)
     }
 
@@ -37,63 +41,107 @@ exports.main = async (event, context) => {
     }
 }
 
+// function formatTime(date) {
+//   var year = date.getFullYear()
+//   var month = date.getMonth() + 1
+//   var day = date.getDate()
+ 
+//   var hour = date.getHours()
+//   var minute = date.getMinutes()
+//   var second = date.getSeconds()
+//   return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+// }
+// function formatNumber(n) {
+//   n = n.toString()
+//   return n[1] ? n : '0' + n
+// } 
+// module.exports = {
+//   formatTime: formatTime
+// }
+
+function loopTerm(idx,des,stickerID)
+{
+    x = idx
+    if(x<des.length)
+    {
+        add_inv(des[idx],stickerID)
+        x++;
+        console.log("inloop",x)
+        console.log(stickerID)
+        loopTerm(x,des,stickerID)
+    }
+}
+// var add_inv = async(term,stickerID)=>{
+function add_inv(term,stickerID)
+{
+    console.log("tmp term is " ,term)//update会自动创建吗
+    db.collection('inv_idx').where({term:term}).get().then((res)=>{
+        console.log(res)
+        if(res.data.length!=0)//存在term
+        {
+            db.collection('inv_idx').where({term:term}).update({
+            data:{
+            term:term,
+            postings: _.addToSet(stickerID)
+            },
+            }).then((res)=>{
+            console.log("term已存在，更新成功",res)
+        })
+        }
+        else{
+        console.log('新建term')
+        db.collection('inv_idx').add({
+            data: {
+                term: term,
+                postings: [stickerID]
+             }
+        })
+        }
+    })
+    
+}
+
 var upload = async(image, path, tag, style, description, openid) => {
+// function upload(image, path, tag, style, description, openid){
     // 完成一个表情包的上传工作
     var stickerID = ''
-    const type = path.slice(path.lastIndexOf('.') + 1, path.length) // 如：jpg
-    const uploadTime = formatTime(new Date());
-    
-    // 对用户描述进行分词
-    let segmentedDescription = nodejieba.cut(description)
-
+    const type = path.slice(path.lastIndexOf('.'), path.length) // 如：.jpg
+    console.log("type",type)
+    // const uploadTime = formatTime(new Date());
+    // let segmentedDescription = nodejieba.cut(description)
+    var segmentedDescription = description
     // 第一次上传数据库，目的只是获取一个_id作为图片的文件名，所以随便传点东西就行
-    await db.collection('sticker').add({
+    db.collection('sticker').add({
         data: {
             tags: [tag, style, description],
             author: openid
-        },
-        success: async(res) => {
+        },}).then((res)=>{
             stickerID = res._id;
             // 上传图片
-            await cloud.uploadFile({
+            console.log('sticker ret id is',stickerID)
+            console.log(uploadTime)
+            cloud.uploadFile({
                 cloudPath: stickerID + type,
-                fileContent: new Buffer(image, 'base64'),
-                success: async(res) => {
-                    // 在数据库sticker集合，写入实际信息
-                    db.collection('sticker').doc(stickerID).set({
-                        data: {
-                            tags: [tag, style, description],
-                            img: res.fileID,
-                            type: type,
-                            uplodaTime: uploadTime,
-                            downloadTimes: 0,
-                            point: 0,
-                            commentTimes: 0,
-                            author: openid
-                        },
-                    })
-                }
-            })
-        }
-    })
-
-    // 更新倒排档文件
-    for(let term of segmentedDescription){
-        await db.collection('inv_idx').doc(term).update({
-            data:{
-                postings: _.addToSet(stickerID)
-            },
-            fail: (res) => {
-                // 如果失败了，说明这个term还没出现在倒排档中，需要新建一个doc
-                db.collection('inv_idx').add({
+                fileContent: Buffer.from(image, 'base64'),
+            }).then((res)=>{
+                console.log('upload file succeeded')
+                db.collection('sticker').doc(stickerID).set({
                     data: {
-                        _id: term,
-                        postings: [stickerID]
-                    }
+                        tags: [tag, style, description],
+                        img: res.fileID,
+                        type: type,
+                        uplodaTime: uploadTime,
+                        downloadTimes: 0,
+                        point: 0,
+                        commentTimes: 0,
+                        author: openid
+                    },
+                }).then((res)=>{//在这里使用promise的循环，祝我好运
+                    console.log("ssssss"+ stickerID)
+                    loopTerm(0,description,stickerID)
+                    return stickerID
+                    })
                 })
-            },
-        })
-    }
-
-    return stickerID    // 将数据库中本表情包对应的_id作为返回值
+            })
 }
+            

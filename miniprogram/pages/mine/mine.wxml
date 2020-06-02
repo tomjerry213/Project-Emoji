@@ -32,3 +32,32 @@
         </navigator>
     </mp-cells>
 </view>
+ <!-- <button type="button" class="btn btn-success" id="postbtn1">中文分词</button> -->
+ <!-- <script>
+            $('#postbtn1').click(function () {
+                var formData = {
+                    msg: $('#msg').val(),
+                    type: "fenci"
+                };
+                $.ajax({
+                    url: 'fenci.php',
+                    type: 'post',
+                    headers: {
+                        'accept': 'application/json;charset=UTF8',
+                        'content-type': 'application/json;charset=utf-8',
+                        'api-key': 'xiaodoubi'
+                    },
+                    contentType: 'application/json;charset=utf-8',
+                    data: JSON.stringify(formData),
+                    success: function (res, textStatus, jQxhr) {
+                        console.log(res);
+                        //var parsedJson = jQuery.parseJSON(res);
+                        //$('#getresultbody').html(parsedJson.header + parsedJson.body);
+                        $('#result').html("<pre>" + formatJson(res) + "</pre>");
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        console.log(errorThrown);
+                    }
+                });
+            });
+            </script> -->

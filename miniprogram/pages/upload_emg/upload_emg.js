@@ -31,13 +31,13 @@ Page({
    */
   data: {
     //for upload many imgs
-    i:0,
-    success:0,
-    fail:0,
+    // i:0,
+    // success:0,
+    // fail:0,
 
     //for save path
-    tmpStickerId:'',
-    tmpType:'',
+    // tmpStickerId:'',
+    // tmpType:'',
     // tmpCloudPath:'',
     // tmpFileID:'',
 
@@ -219,19 +219,45 @@ Page({
     mask: true,       
     icon: 'success'})
   },
-
+  showEmpty: function () 
+  {    
+    wx.showToast({
+    title: '没有要上传的文件！',      
+    mask: true,       
+    icon: 'none'    
+  })  
+}, 
+delRepeat: function (array) {
+  var temp = {}, len = array.length;
+  for (var i = 0; i < len; i++) {
+      var tmp = array[i];
+      if (!temp.hasOwnProperty(tmp)) {//hasOwnProperty用来判断一个对象是否有你给出名称的属性或对象
+          temp[array[i]] = "yes";
+      }
+  }
+  len = 0;
+  var tempArr = [];
+  for (var i in temp) {
+      tempArr[len++] = i;
+  }
+  return tempArr;
+}, 
   uploadImg: function(data){
     this.showBusy()
     console.log(data)
-    // var i = data.i?data.i:0;
+    var i = data.i?data.i:0;
     // success = data.success ? data.success : 0,
     // fail = data.fail ? data.fail : 0;
     var detailPics = this.data.detailPics;
+    var that = this
+    var description = this.data.emgDescription
+    const uploadTime = formatTime(new Date());
     console.log(detailPics)
     if(detailPics.length!=0){
       let images = []
       
       // 对每一张图片编码为base64格式，作为参数上传给云函数
+      //转码
       for (let picPath of detailPics){
         wx.getFileSystemManager().readFile({
           filePath: picPath,
@@ -242,30 +268,94 @@ Page({
         })
       }
       console.log("images: ", images);
+      //分词
+      var formData = {
+        msg: description,
+        type: "fenci"
+        }; 
+        console.log(formData)
+        wx.request({
+          url: 'https://jsonin.com/fenci.php',
+          method: 'post',
+          data: JSON.stringify(formData),
+          header: {
+          "content-type": "application/x-www-form-urlencoded"
+          },
+          success: function (res) {
+            console.log(res.data)
+            // return res.data，对data去重
+            var tmpdata = that.delRepeat(res.data)
+            console.log(tmpdata)
+            wx.cloud.callFunction({
+              name: 'uploadSticker',
+              data: {
+                images: images, paths: detailPics, 
+                tag: that.data.typeArray[that.data.typeIndex],
+                style:  that.data.styleArray[that.data.styleIndex],
+                // description: that.data.emgDescription
+                uploadTime:uploadTime,
+                description:tmpdata
+              },
+              success: res => {
+                console.log("上传完成，云函数返回结果为：",res)
+              },
+              faile: res=>{
+                console.log("上传失败")
+              },
+              complete:res=>{
+                that.showSuccess()
+                console.log("ret is",res)
+                that.setData({
+                  detailPics:[],
+                  currentLen:0,
+                  maxDesLen:30,
+                  // emgDescription:""
+                  })
+              }
+            })
+          },
+          fail:function (res){
+            // return []
+            console.log("分词失败,仍然上传")
+            wx.cloud.callFunction({
+              name: 'uploadSticker',
+              data: {
+                images: images, paths: detailPics, 
+                tag: that.data.typeArray[that.data.typeIndex],
+                style:  that.data.styleArray[that.data.styleIndex],
+                // description: that.data.emgDescription
+                description:[description]
+              },
+              success: res => {
+                console.log("上传完成，云函数返回结果为：",res.data)
+              },
+              faile: res=>{
+                console.log("上传失败")
+              },
+              complete:res=>{
+                that.showSuccess()
+                console.log("ret is",res)
+                that.setData({
+                  detailPics:[],
+                  currentLen:0,
+                  maxDesLen:30,
+                  emgDescription:""
+                  })
+              }
+            })
+          }
+        })
 
-      // 调用云函数
-      wx.cloud.callFunction({
-        name: 'uploadSticker',
-        data: {
-          images: images, paths: detailPics, 
-          tag: this.data.typeArray[this.data.typeIndex],
-          style:  this.data.styleArray[this.data.styleIndex],
-          description: this.data.emgDescription
-        },
-        success: res => {
-          console.log("上传完成，云函数返回结果为：",res.data)
-        }
-      })
-
-      // var tmpPath = detailPics[i]
-      // var type = tmpPath.slice(tmpPath.lastIndexOf('.')+1,tmpPath.length)
-      // var time = formatTime(new Date());
-      // var that = this
-      // const tags = [
-      //   this.data.typeArray[this.data.typeIndex],
-      //   this.data.styleArray[this.data.styleIndex],
-      //   this.data.emgDescription
-      // ];
+      //本地上传的版本
+    //   var tmpPath = detailPics[i]
+    //   var type = tmpPath.slice(tmpPath.lastIndexOf('.')+1,tmpPath.length)
+    //   var time = formatTime(new Date());
+    //   var that = this
+    //   const tags = [
+    //     this.data.typeArray[this.data.typeIndex],
+    //     this.data.styleArray[this.data.styleIndex],
+    //     this.data.emgDescription
+    //   ];
 
     // const db = wx.cloud.database()
     //   stickerCollection.add({
@@ -320,56 +410,60 @@ Page({
     //             success: (res)=>{
     //               console.log("change sticker collection success")
     //               //call user? 我实在不想嵌套了
-
     //             },
     //             fail: (err)=>{
     //               console.log("Err when change path in sticker collection")
     //             },
     //             complete: () => {
-    //               i++;
-    //               console.log("in comlpete "+ String(i))//嵌套之后不能用that了
-    //               if(i==detailPics.length)
+    //               //上传完成后更新倒排索引
+    //               console.log("In complete")
+    //               for(let term of segmentedDescription)
     //               {
-    //                 console.log('上传图片完成')
-    //                 that.showSuccess()
-    //                 that.setData({
-    //                       detailPics:[],
-    //                       i:0,
-    //                       success:0,
-    //                       fail:0,
-    //                       currentLen:0,
-    //                       maxDesLen:30,
-    //                       emgDescription:""
-    //                     })
-    //                 // wx.showModal({
-    //                 //   title: '提示',
-    //                 //   content: '上传成功',
-    //                 //   success: function (res) {
-    //                 //     if (res.confirm) {//这里是点击了确定以后
-    //                 //       console.log('用户点击确定')
-    //                 //     }
-    //                 //     else {//这里是点击了取消以后
-    //                 //       console.log('用户点击取消')
-    //                 //     }
-    //                 //     that.setData({
-    //                 //       detailPics:[],
-    //                 //       i:0,
-    //                 //       success:0,
-    //                 //       fail:0,
-    //                 //       currentLen:0,
-    //                 //       maxDesLen:30,
-    //                 //       emgDescription:""
-    //                 //     })
-    //                 //   }
-    //                 // })
+    //                   db.collection('inv_idx').doc(term).update({
+    //                       data:{
+    //                           postings: _.addToSet(stickerID)
+    //                       },
+    //                       success:(res)=>{
+    //                           console.log("term已存在")
+    //                       },
+    //                       fail: (res) => {
+    //                           // 如果失败了，说明这个term还没出现在倒排档中，需要新建一个doc
+    //                           console.log('新建term')
+    //                           db.collection('inv_idx').add({
+    //                               data: {
+    //                                   _id: term,
+    //                                   postings: [stickerID]
+    //                               }
+    //                           })
+    //                       },
+    //                       complete:(res)=>{
+    //                         console.log("in comlpete "+ String(i))//嵌套之后不能用that了
+    //                         i++;
+    //                         if(i==detailPics.length)
+    //                         {
+    //                           console.log('上传图片完成')
+    //                           that.showSuccess()
+    //                           that.setData({
+    //                                 detailPics:[],
+    //                                 i:0,
+    //                                 success:0,
+    //                                 fail:0,
+    //                                 currentLen:0,
+    //                                 maxDesLen:30,
+    //                                 emgDescription:""
+    //                           })
+    //                         }
+    //                         else{
+    //                           data.i = i;
+    //                           // data.success = success;
+    //                           // data.fail = fail;
+    //                           console.log('recurrent')
+    //                           that.uploadImg(data);//递归，回调
+    //                         }
+    //                       }
+    //                   })
     //               }
-    //               else{
-    //                 data.i = i;
-    //                 // data.success = success;
-    //                 // data.fail = fail;
-    //                 console.log('recurrent')
-    //                 that.uploadImg(data);//递归，回调
-    //               }
+
     //             }
     //           })
     //         },
@@ -385,6 +479,7 @@ Page({
     //   })
     }
     else{
+      that.showEmpty(),
       console.log("no img to upload")
     }
   }

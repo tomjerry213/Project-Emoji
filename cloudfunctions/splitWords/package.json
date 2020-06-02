@@ -1,5 +1,5 @@
 {
-  "name": "uploadSticker",
+  "name": "splitWords",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,6 +9,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "node-gyp": "^5.1.1",
+    "nodejieba": "^2.4.1",
+    "pack": "^2.2.0",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5",
+    "unicode": "^12.1.0",
     "wx-server-sdk": "~2.0.4"
   }
 }

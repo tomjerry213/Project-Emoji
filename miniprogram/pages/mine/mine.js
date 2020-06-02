@@ -19,7 +19,24 @@ Page({
 
 
   onLoad: function (options) {
-  },
+
+    var formData = {
+    msg: "原来不是你不行，是我不行",
+    type: "fenci"
+    }; 
+    wx.request({
+      url: 'https://jsonin.com/fenci.php',
+      method: 'post',
+      data: JSON.stringify(formData),
+      header: {
+      "content-type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+      console.log(res)
+      }
+      })
+
+},
 
   /**
    * 生命周期函数--监听页面初次渲染完成

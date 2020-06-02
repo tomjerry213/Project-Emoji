@@ -7,11 +7,6 @@ Page({
    * 用户打开即显示like/star数目，在界面退出的时候再更新数字
    */
   data: {
-    /** get Image url from other pages like emg_class
-     *  or maybe load it from database
-     *  load from database please also load its features
-     * some are just for demo 
-    */
     //ImgUrl:'/emg_type/rec_0.jpg',
     ImgUrl: '',
     imgID: '',
@@ -33,16 +28,17 @@ Page({
     var inpVal = options.ImgUrl
     var inpAuthor = options.author
     var inpTag = JSON.parse(options.tags) 
-    var inpLike = options.numLike
-    var inpStar = options.numStar
+    var inpLike = options.likeTimes
+    var inpStar = options.starTimes
     // var inpBoolLike = JSON.parse(options.boolLike)
     // var inpBoolCollect = JSON.parse(options.boolCollect)
-
+    console.log(inpLike)
+    console.log(inpStar)
     // 从App()中缓存的用户信息判断用户是否点赞/收藏过本表情包
     var inpBoolLike = getApp().globalData.userInfo.likeList.includes(inpID)
     var inpBoolStar = getApp().globalData.userInfo.starList.includes(inpID)
     
-    console.log(getApp().globalData.userInfo.likeList)
+    // console.log(getApp().globalData.userInfo.likeList)
     console.log(inpVal)
     console.log('inpBoolLike:', inpBoolLike)
     console.log('inpBoolStar:', inpBoolStar)

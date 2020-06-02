@@ -17,24 +17,58 @@ Page({
    * 生命周期函数--监听页面加载
    */
 
-
+  delRepeat: function (array) {
+    var temp = {}, len = array.length;
+    for (var i = 0; i < len; i++) {
+        var tmp = array[i];
+        if (!temp.hasOwnProperty(tmp)) {//hasOwnProperty用来判断一个对象是否有你给出名称的属性或对象
+            temp[array[i]] = "yes";
+        }
+    }
+    len = 0;
+    var tempArr = [];
+    for (var i in temp) {
+        tempArr[len++] = i;
+    }
+    return tempArr;
+  },
   onLoad: function (options) {
+    //测试分词
+    // var formData = {
+    // // msg: "你是不是没吃饭啊，我很高兴",
+    // msg: "我很不是乐意是吧",
+    // type: "fenci"
+    // }; 
+    // var that = this
+    // wx.request({
+    //   url: 'https://jsonin.com/fenci.php',
+    //   method: 'post',
+    //   data: JSON.stringify(formData),
+    //   header: {
+    //   "content-type": "application/x-www-form-urlencoded"
+    //   },
+    //   success: function (res) {
+    //     console.log(res.data)
+    //     // var des = 
+    //     var tmpdata = that.delRepeat(res.data)
 
-    var formData = {
-    msg: "原来不是你不行，是我不行",
-    type: "fenci"
-    }; 
-    wx.request({
-      url: 'https://jsonin.com/fenci.php',
-      method: 'post',
-      data: JSON.stringify(formData),
-      header: {
-      "content-type": "application/x-www-form-urlencoded"
-      },
-      success: function (res) {
-      console.log(res)
-      }
-      })
+    //     console.log(tmpdata)
+    //     wx.cloud.callFunction({
+    //       name: 'searchInv',
+    //       data:{
+    //         description:tmpdata
+    //       },
+    //       success:function (res){
+    //         console.log("function res ",res)
+    //       }
+    //     })
+    //   },
+    //   fail:function(res){
+    //     console.log("分词失败")
+    //   }
+    // })
+
+    //测试分词和搜索
 
 },
 

@@ -21,7 +21,9 @@
         <view class="weui-grids">
             <!-- just for show here -->
             <view class="weui-grid hot_search_grid" wx:for="{{hotSearches}}" bindtap='tapHotWords'>
+                <navigator url="{{'/pages/emg_class/emg_class'+'?name='+item+'&searchFor=search'}}">
                 <text type="button" class="hot_search_word" bindtap='tapHotWords'>{{item}}</text> 
+                </navigator>
             </view>
         </view>
     </view>
@@ -30,7 +32,7 @@
         <view class="page_title">精选表情</view>
         <view class="weui-grids">
             <view class="weui-grid" wx:for="{{recRouters}}" wx:key="name">
-                <navigator url="{{item.url+'?name='+item.name+'&searchFor=hot'}}">
+                <navigator url="{{item.url+'?name='+item.name+'&searchFor=search'}}">
                     <image class="grid_emoji" src="{{item.icon}}" mode="scaleToFill"/>
                     <text class="grid_label">{{item.name}}</text>
                 </navigator>

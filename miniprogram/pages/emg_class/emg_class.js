@@ -149,6 +149,61 @@ Page({
       }
     })
   },
+  delRepeat: function (array) {
+    var temp = {}, len = array.length;
+    for (var i = 0; i < len; i++) {
+        var tmp = array[i];
+        if (!temp.hasOwnProperty(tmp)) {//hasOwnProperty用来判断一个对象是否有你给出名称的属性或对象
+            temp[array[i]] = "yes";
+        }
+    }
+    len = 0;
+    var tempArr = [];
+    for (var i in temp) {
+        tempArr[len++] = i;
+    }
+    return tempArr;
+},
+  listStickerBySearch:function(description)//传入分词之后的东西
+  {
+    var that = this
+    console.log("search for ",description)
+      var formData = {
+            // msg: "你是不是没吃饭啊，我很高兴",
+            msg: description,
+            type: "fenci"
+      }; 
+      wx.request({
+              url: 'https://jsonin.com/fenci.php',
+              method: 'post',
+              data: JSON.stringify(formData),
+              header: {
+              "content-type": "application/x-www-form-urlencoded"
+              },
+              success: function (res) {
+                // console.log(res.data)
+                var tmpdata = that.delRepeat(res.data)
+                console.log(tmpdata)
+                wx.cloud.callFunction({
+                  name: 'searchInv',
+                  data:{
+                    description:tmpdata
+                  },
+          success:function (res){//搜索
+            console.log("search res ",res)
+            that.image_info = res.result.data
+            that.extractInfo(that.image_info)
+          },
+          fail:function(res){
+            console.log("搜索失败")//啥都不干就是啥都莫得
+          }
+        })
+      },
+      fail:function(res){
+        console.log("分词失败")
+      }
+    })
+  },
   // assist func
   extractInfo(info) {
     var image_URL = new Array()
@@ -174,10 +229,19 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  showBusy: function () 
+  {    
+    wx.showToast({
+    title: '搜索中...',      
+    mask: true,       
+    icon: 'loading'    
+  })  
+},  
   onLoad: function (options) {
     var inpVal = options.name
     var searchfor = options.searchFor
-
+    var that = this
+    that.showBusy()
     console.log(options)
     this.setData({
       className:inpVal,
@@ -187,13 +251,17 @@ Page({
     console.log(searchfor)
     if(searchfor == 'type')//根据跳转信息
     {
-      this.listStickerByTypeUI();
+      that.listStickerByTypeUI();
     }
-    else if(searchfor == 'style'){
-      this.listStickerByStyleUI();
+    else if(searchfor == 'style'){//根据跳转信息
+      that.listStickerByStyleUI();
+    }
+    else if(searchfor == 'search'){
+      console.log("in Search")
+      that.listStickerBySearch(inpVal)
     }
     else{
-      this.listStickerByTypeUI();
+
     }
     var url = name2url[inpVal]
      this.setData({

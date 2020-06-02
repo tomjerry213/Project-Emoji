@@ -21,7 +21,10 @@ exports.main = async (event, context) => {
     const paths = event.paths;          // 表情包在本地的路径，用于解析type信息
     const tag = event.tag;
     const style = event.style;
-    const description = event.description;  // 表情包类别、风格、用户描述
+    var description = event.description;  // 表情包类别、风格、用户描述
+    // description.push(tag);
+    // description.push(style);
+    const fullDes = event.fullDes;
     uploadTime = event.uploadTime
     const openid = wxContext.OPENID;
     // const time = formatTime(new Date());
@@ -29,11 +32,11 @@ exports.main = async (event, context) => {
     // 遍历每个表情包，执行上传函数，并记录每个表情包在数据库中的_id返回。
     stickerIDs = []
     for (idx in images){
-        let stickerID = await upload(images[idx], paths[idx], tag, style, description, openid);//返回的是一个promise对象
-        console.log("stID is",stickerID)//这是个promise对象？
-        stickerIDs.push(stickerID)
+        await upload(images[idx], paths[idx], tag, style, description, openid,fullDes);//返回的是一个promise对象
+        // console.log("stID is",stickerID)//这是个promise对象？
+        // await stickerIDs.push(stickerID)
     }
-
+    // await console.log("return now")
     return {
         event,
         openid: openid,
@@ -41,23 +44,6 @@ exports.main = async (event, context) => {
     }
 }
 
-// function formatTime(date) {
-//   var year = date.getFullYear()
-//   var month = date.getMonth() + 1
-//   var day = date.getDate()
- 
-//   var hour = date.getHours()
-//   var minute = date.getMinutes()
-//   var second = date.getSeconds()
-//   return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
-// }
-// function formatNumber(n) {
-//   n = n.toString()
-//   return n[1] ? n : '0' + n
-// } 
-// module.exports = {
-//   formatTime: formatTime
-// }
 
 function loopTerm(idx,des,stickerID)
 {
@@ -101,15 +87,16 @@ function add_inv(term,stickerID)
     
 }
 
-var upload = async(image, path, tag, style, description, openid) => {
-// function upload(image, path, tag, style, description, openid){
+// var upload = async(image, path, tag, style, description, openid) => {//这东西是同步的
+function upload(image, path, tag, style, description, openid,fullDes){
+    let p = new Promise(res=>{
     // 完成一个表情包的上传工作
     var stickerID = ''
     const type = path.slice(path.lastIndexOf('.'), path.length) // 如：.jpg
     console.log("type",type)
     // const uploadTime = formatTime(new Date());
     // let segmentedDescription = nodejieba.cut(description)
-    var segmentedDescription = description
+    // var segmentedDescription = description
     // 第一次上传数据库，目的只是获取一个_id作为图片的文件名，所以随便传点东西就行
     db.collection('sticker').add({
         data: {
@@ -127,21 +114,24 @@ var upload = async(image, path, tag, style, description, openid) => {
                 console.log('upload file succeeded')
                 db.collection('sticker').doc(stickerID).set({
                     data: {
-                        tags: [tag, style, description],
+                        tags: [tag, style, fullDes],//用分词前的description，在display中显示
                         img: res.fileID,
                         type: type,
                         uplodaTime: uploadTime,
                         downloadTimes: 0,
                         point: 0,
                         commentTimes: 0,
-                        author: openid
+                        author: openid,
+                        // fullDes:fullDes
                     },
                 }).then((res)=>{//在这里使用promise的循环，祝我好运
-                    console.log("ssssss"+ stickerID)
+                    // console.log("ssssss"+ stickerID)
                     loopTerm(0,description,stickerID)
                     return stickerID
                     })
                 })
             })
+        })
+        return p
 }
             

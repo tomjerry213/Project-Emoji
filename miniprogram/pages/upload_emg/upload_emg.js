@@ -251,6 +251,7 @@ delRepeat: function (array) {
     var detailPics = this.data.detailPics;
     var that = this
     var description = this.data.emgDescription
+    var oldDes = description
     const uploadTime = formatTime(new Date());
     console.log(detailPics)
     if(detailPics.length!=0){
@@ -284,7 +285,11 @@ delRepeat: function (array) {
           success: function (res) {
             console.log(res.data)
             // return res.data，对data去重
-            var tmpdata = that.delRepeat(res.data)
+            var des = res.data
+            des.push(that.data.typeArray[that.data.typeIndex])
+            des.push(that.data.styleArray[that.data.styleIndex])
+            var tmpdata = that.delRepeat(des)
+
             console.log(tmpdata)
             wx.cloud.callFunction({
               name: 'uploadSticker',
@@ -294,7 +299,8 @@ delRepeat: function (array) {
                 style:  that.data.styleArray[that.data.styleIndex],
                 // description: that.data.emgDescription
                 uploadTime:uploadTime,
-                description:tmpdata
+                description:tmpdata,
+                fullDes: oldDes
               },
               success: res => {
                 console.log("上传完成，云函数返回结果为：",res)
@@ -324,7 +330,8 @@ delRepeat: function (array) {
                 tag: that.data.typeArray[that.data.typeIndex],
                 style:  that.data.styleArray[that.data.styleIndex],
                 // description: that.data.emgDescription
-                description:[description]
+                description:[description],
+                fullDes:oldDes
               },
               success: res => {
                 console.log("上传完成，云函数返回结果为：",res.data)
@@ -339,7 +346,7 @@ delRepeat: function (array) {
                   detailPics:[],
                   currentLen:0,
                   maxDesLen:30,
-                  emgDescription:""
+                  // emgDescription:""
                   })
               }
             })

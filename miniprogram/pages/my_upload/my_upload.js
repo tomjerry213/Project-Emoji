@@ -43,11 +43,10 @@ Page({
      wx.cloud.callFunction({
        name:"getStickerOfUser",
        data:{
-         userID:app.globalData.userInfo._id
+         userID:app.globalData.userInfo.openid
        },
-
        success(res){
-          // console.log(res.result.stickerUrlList)
+          console.log(res.result.stickerUrlList)
           const data =res.result.stickerUrlList.data
           //console.log(data)
           const temp = new Array()

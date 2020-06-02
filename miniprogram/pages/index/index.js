@@ -56,39 +56,6 @@ Page({
             },
         ],
 
-        hotRouters: [
-            {
-                name: 'grid0',
-                url: '/pages/emg_class/emg_class',
-                icon: '/emg_hot/rec_0.jpg',
-
-            },
-            {
-                name: 'grid1',
-                url: '/pages/emg_class/emg_class',
-                icon: '/emg_hot/rec_1.jpg',
-            },
-            {
-                name: 'grid2',
-                url: '/pages/emg_class/emg_class',
-                icon: '/emg_hot/rec_2.jpg',
-            },
-            {
-                name: 'grid3',
-                url: '/pages/emg_class/emg_class',
-                icon: '/emg_hot/rec_3.jpg',
-            },
-            {
-                name: 'grid4',
-                url: '/pages/emg_class/emg_class',
-                icon: '/emg_hot/rec_4.jpg',
-            },
-            {
-                name: 'grid5',
-                url: '/pages/emg_class/emg_class',
-                icon: '/emg_hot/rec_5.jpg',
-            },
-        ]
     },
     // for search bar
     search: function () {
@@ -98,9 +65,7 @@ Page({
     },
     // touch hot words, now we are using class show, need add name and process/search
     tapHotWords: function() {
-        wx.navigateTo({
-            url: '../emg_class/emg_class'
-        })
+        console.log("just tap")
     },
     //生命周期函数
     onLoad: function() {
@@ -137,11 +102,5 @@ Page({
         console.log(this.data.userInfo)
         
     },
-    // not useful new 
-    searchStart: function(inputVal){
-        console.log(inputVal)
-        wx.navigateTo({
-            url:'../searchres/searchres?inputVal='+JSON.stringify(inputVal),
-        })
-    }
+
 })

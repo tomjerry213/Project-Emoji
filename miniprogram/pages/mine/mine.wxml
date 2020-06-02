@@ -18,11 +18,11 @@
                 <image slot="icon" src="/icons/cloud-HL.png" style="margin-right: 16px;vertical-align: middle;width:25px; height: 25px;"></image>
             </mp-cell>
         </navigator>
-        <navigator url="/pages/get_likes/get_likes">
+        <!--<navigator url="/pages/get_likes/get_likes">
             <mp-cell value="收到的赞" style="font-weight: bold;vertical-align: middle;">
                 <image slot="icon" src="/icons/like-HL.png" style="margin-right: 16px;vertical-align: middle;width:25px; height: 25px;"></image>
             </mp-cell>
-        </navigator>
+        </navigator>-->
     </mp-cells>
     <mp-cells ext-class="my-cells" title="开发者信息">
         <navigator url="/pages/about_us/about_us">

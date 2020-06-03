@@ -24,7 +24,16 @@ Page({
 
     jumpDisplay: function (event) {
         var tmpItem = event.currentTarget.dataset.item;
-        var tmpUrl = tmpItem.url+'?ImgUrl='+tmpItem.icon+'&tags='+JSON.stringify(tmpItem.tag)+'&numLike=1&boolLike=true&boolCollect=true&author=匿名'
+        console.log(tmpItem)
+        // var tmpUrl = tmpItem.url+'?ImgUrl='+tmpItem.icon+'&tags='+JSON.stringify(tmpItem.tag)+'&numLike=1&boolLike=true&boolCollect=true&author=匿名'
+        var tmpUrl = '../emg_display/emg_display?ImgUrl='+tmpItem.img
+        +'&tags='+JSON.stringify(tmpItem.tags)+
+        // +'&numLike=0&boolLike=false&boolCollect=false&author=KAISHUI'
+        '&numLike=' + tmpItem.likeTimes+
+        '&numStar=' + tmpItem.starTimes+
+        '&author=' + tmpItem.author+
+        '&imgID=' + tmpItem._id;
+        console.log(tmpUrl)
         wx.navigateTo({
             url: tmpUrl
         })
@@ -50,12 +59,13 @@ Page({
           success(res){
             console.log(res)
              console.log(res.result)
-             const data =res.result//this is already sticler list
+             const data =res.result.data//this is already sticler list
              //console.log(data)
              const temp = new Array()
              for(let i = 0;i<data.length;i++)
              {
-               temp.push({"img":data[i].img,"tag":data[i].tags})
+              //  temp.push({"img":data[i].img,"tag":data[i].tags})
+              temp.push(data[i])
              }
              that.setData({imageUrl:temp})
           },

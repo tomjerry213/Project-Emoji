@@ -28,8 +28,8 @@ Page({
     var inpVal = options.ImgUrl
     var inpAuthor = options.author
     var inpTag = JSON.parse(options.tags) 
-    var inpLike = options.likeTimes
-    var inpStar = options.starTimes
+    var inpLike = options.numLike
+    var inpStar = options.numStar
     // var inpBoolLike = JSON.parse(options.boolLike)
     // var inpBoolCollect = JSON.parse(options.boolCollect)
     console.log(inpLike)

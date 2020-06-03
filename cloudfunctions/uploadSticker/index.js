@@ -120,6 +120,8 @@ function upload(image, path, tag, style, description, openid,fullDes){
                         uplodaTime: uploadTime,
                         downloadTimes: 0,
                         point: 0,
+                        likeTimes:0,
+                        starTimes:0,
                         commentTimes: 0,
                         author: openid,
                         // fullDes:fullDes

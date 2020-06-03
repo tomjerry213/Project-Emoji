@@ -1,0 +1,59 @@
+author: lsl
+date: 2020.0603
+
+
+前端js的处理部分：
+分词：
+开始的分词打算是调用nodejieba库在云函数进行分词，但由于微信小程序云端环境安装外部依赖库不成熟也没有相关的文档，
+选择使用api：https://jsonin.com/fenci.php进行分词操作，用于构架倒排索引和搜索
+
+后端数据库：
+inv_idx倒排索引，为了实现搜索功能二创建，其中每条记录为：
+	term:xxx
+	postings:[stickerID list]
+sticker	:表情包数据库，记录文件fileID，作者，赞数，类型等
+user	:用户数据库，记录用户的点赞收藏列标和用户的openID
+
+云函数：
+1. uploadSticker:
+调用参数：
+images：	base64编码后的表情包文件列表
+paths：		表情包在本地的路径，用于解析表情包的类型（如jpg，gif等）
+tag：		表情包在分类中的表情包类别
+style：		表情包在分类中的表情包风格
+fullDes：	作者对表情包的描述
+description：分词后的作者描述
+uploadTime：上传时间
+
+功能：
+将表情包上传到数据库sticker和云存储，并同步数据库中的倒排索引inv_idx和用户集合user
+
+实现细节：
+对每张图片，首先对sticker集合随便上传信息获取其在sticker集合中的唯一标识_id
+之后以_id + 表情包文件类型（如.jpg）作为在存储中的文件名，获取存储文件的fileID作为娴熟路径
+之后将fileID写入该表情字段并初始化该表情在sticker集合中的其他字段
+最后将分词更新倒排索引
+
+2.搜索searchInv
+调用参数：分词后的用户输入
+
+功能：从倒排数据库中搜索符合要求的stickerID并将结果排序
+
+实现细节：
+对分词后的每一个term，查询inv_idx，返回其对应的表情包列表
+维护一个weightDic，为表情包做权重，对用户输入中的每一个term，权重+=其在inv_idx对应的表情包列标长度的倒数为1/len
+从数据库的sticker集合中读取这些内容，根据weightDic排序并返回
+注：本想用tfidf算法，但是考虑到用户的description限制较短且对词语需去重，当前算法文档中不需要计算同一个词的词频且不必访问其他倒排索引，故选择当前算法
+
+3.用户点赞/收藏，取消点赞/收藏changeLikeOrStarStatus
+功能：
+	维护用户的likeList和starList
+	维护表情包的likeTimes和starTimes
+
+4.获取用户收藏表情包listUserStarSticker
+调用参数：用户的openID
+功能：返回用户收藏列表
+实现：读取user集合中的starList,从sticker集合中读取并返回
+
+5.获取某个用户上传的表情包getStickerOfUser:
+实现：在sticker集合中寻找author为目标user的表情包并返回

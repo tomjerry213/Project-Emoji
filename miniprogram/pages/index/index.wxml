@@ -19,10 +19,9 @@
     <view class="page__hd" style="background-color:#87CEFA;">
         <view class="page_title">热门搜索</view>
         <view class="weui-grids">
-            <!-- just for show here -->
-            <view class="weui-grid hot_search_grid" wx:for="{{hotSearches}}" bindtap='tapHotWords'>
-                <navigator url="{{'/pages/emg_class/emg_class'+'?name='+item+'&searchFor=search'}}">
-                <text type="button" class="hot_search_word" bindtap='tapHotWords'>{{item}}</text> 
+            <view class="weui-grid hot_search_grid" wx:for="{{hotSearches}}" wx:key="name">
+                <navigator url="{{item.url+'?name='+item.name+'&searchFor=search'}}">
+                    <text type="button" class="hot_search_word" bindtap='tapHotWords'>{{item.name}}</text> 
                 </navigator>
             </view>
         </view>

@@ -11,12 +11,36 @@ Page({
         /*actually a paser is enough, for further use*/ 
 
         hotSearches: [
-            '我太难了',
-            '我酸了',
-            '奇怪的知识',
-            '奥利给',
-            '我想上学',
-            '黑人抬棺',
+            // '我太难了',
+            // '我酸了',
+            // '奇怪的知识',
+            // '奥利给',
+            // '我想上学',
+            // '黑人抬棺',
+            {
+                name: '我太难了',
+                url: '/pages/emg_class/emg_class',
+            },
+            {
+                name: '我酸了',
+                url: '/pages/emg_class/emg_class',
+            },
+            {
+                name: '奇怪的知识',
+                url: '/pages/emg_class/emg_class',
+            },
+            {
+                name: '奥利给',
+                url: '/pages/emg_class/emg_class',
+            },
+            {
+                name: '我想上学',
+                url: '/pages/emg_class/emg_class',
+            },
+            {
+                name: '黑人抬棺',
+                url: '/pages/emg_class/emg_class',
+            }
         ],
 
         // TODO: 未来将要从云存储（而不是本地）加载这些图片和类

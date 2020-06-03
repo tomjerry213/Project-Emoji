@@ -24,15 +24,20 @@ exports.main = async (event, context) => {
   //search in database
   //构建候选stickerIDs，按照文档中的占比权重返回sticker weight
   //排序后返回stickerIDs
+  //会有奇怪的初始值
+  weightDic = {}
+  console.log("init weight dict",weightDic)
     await getFrequency(description)//为什么一次循环return了？
     console.log("sort now")
     //从大到小排序
-    var res = Object.keys(weightDic).sort(function(a,b){ return weightDic[a]-weightDic[b];}); 
+    var res = Object.keys(weightDic)//.sort(function(a,b){ return weightDic[b]-weightDic[a];}); 
     console.log(res)
     // return weightDic
     var data = await db.collection('sticker').where({_id:_.in(res)}).get()//这里发现userList的效率有问题，但是我懒得改了
-    console.log(data)
-    return data
+    console.log(data)//哦没有排序，在查询之后为data排序
+    var ret = data.data.sort(function(a,b){ return weightDic[b._id]-weightDic[a._id];}); 
+    console.log(ret)
+    return ret
 }
 //每次都写一个function 然后用P作为res，我只是想让你异步访问数据库
 // async是返回的promise
@@ -49,7 +54,7 @@ var getFrequency = async(description)=>{
     var data = await changeDict(tmpterm)
     // changeDict(tmpterm)
     // console.log(data)
-    console.log("weight dict is",weightDic)//这里并行也罢
+    console.log("after term, weight dict is",weightDic)//这里并行也罢
   }
   // })
   // return p

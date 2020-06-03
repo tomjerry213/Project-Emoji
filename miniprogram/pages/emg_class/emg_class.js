@@ -191,7 +191,8 @@ Page({
                   },
           success:function (res){//搜索
             console.log("search res ",res)
-            that.image_info = res.result.data
+            // that.image_info = res.result.data
+            that.image_info = res.result
             that.extractInfo(that.image_info)
           },
           fail:function(res){

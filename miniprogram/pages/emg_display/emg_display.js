@@ -61,7 +61,7 @@ Page({
 
       // 从App()中缓存的用户信息likeList中删除本表情包
       var idxToRemove = getApp().globalData.userInfo.likeList.indexOf(this.data.imgID)
-      if (idxToRemove != 1) getApp().globalData.userInfo.likeList.splice(idxToRemove, 1)
+      if (idxToRemove != -1) getApp().globalData.userInfo.likeList.splice(idxToRemove, 1)
 
       console.log(getApp().globalData.userInfo.likeList)
 
@@ -93,7 +93,7 @@ Page({
 
       // 从App()中缓存的用户信息starList中删除本表情包
       var idxToRemove = getApp().globalData.userInfo.starList.indexOf(this.data.imgID)
-      if (idxToRemove != 1) getApp().globalData.userInfo.starList.splice(idxToRemove, 1)
+      if (idxToRemove != -1) getApp().globalData.userInfo.starList.splice(idxToRemove, 1)
 
       // 调用云函数，修改数据库中user集合和sticker集合的信息
       wx.cloud.callFunction({

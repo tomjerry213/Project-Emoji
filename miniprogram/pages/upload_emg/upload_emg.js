@@ -227,6 +227,14 @@ Page({
     icon: 'none'    
   })  
 }, 
+showFail: function () 
+{    
+  wx.showToast({
+  title: '上传失败orz',      
+  mask: true,       
+  icon: 'none'    
+})  
+}, 
 delRepeat: function (array) {
   var temp = {}, len = array.length;
   for (var i = 0; i < len; i++) {
@@ -303,13 +311,14 @@ delRepeat: function (array) {
                 fullDes: oldDes
               },
               success: res => {
+                that.showSuccess()
                 console.log("上传完成，云函数返回结果为：",res)
               },
               faile: res=>{
                 console.log("上传失败")
               },
               complete:res=>{
-                that.showSuccess()
+                
                 console.log("ret is",res)
                 that.setData({
                   detailPics:[],
@@ -335,12 +344,13 @@ delRepeat: function (array) {
               },
               success: res => {
                 console.log("上传完成，云函数返回结果为：",res.data)
+                that.showSuccess()
               },
               faile: res=>{
                 console.log("上传失败")
               },
               complete:res=>{
-                that.showSuccess()
+                
                 console.log("ret is",res)
                 that.setData({
                   detailPics:[],

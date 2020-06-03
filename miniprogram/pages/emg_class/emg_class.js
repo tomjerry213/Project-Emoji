@@ -183,7 +183,7 @@ Page({
               success: function (res) {
                 // console.log(res.data)
                 var tmpdata = that.delRepeat(res.data)
-                console.log(tmpdata)
+                console.log("tmp data is ",tmpdata)
                 wx.cloud.callFunction({
                   name: 'searchInv',
                   data:{
